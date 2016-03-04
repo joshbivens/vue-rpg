@@ -9875,21 +9875,59 @@
 
 	var _creatorComponentTemplate2 = _interopRequireDefault(_creatorComponentTemplate);
 
+	var _statsComponent = __webpack_require__(5);
+
+	var _statsComponent2 = _interopRequireDefault(_statsComponent);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var CreatorComponent = _vue2.default.extend({
 	  template: _creatorComponentTemplate2.default,
+	  components: {
+	    'stats-component': _statsComponent2.default
+	  },
 	  data: function data() {
 	    return {
-	      characterName: '',
-	      caste: '',
-	      created: false
+	      character: {
+	        characterName: '',
+	        caste: '',
+	        hp: 100,
+	        strength: 0,
+	        agility: 0,
+	        luck: 0,
+	        mana: 0,
+	        created: false
+	      }
 	    };
 	  },
 
 	  methods: {
 	    create: function create() {
-	      this.created = true;
+	      this.character.created = true;
+	      if (this.character.caste == "Warrior") {
+	        this.character.strength = 80;
+	        this.character.agility = 30;
+	        this.character.luck = 30;
+	        this.character.mana = 10;
+	      }
+	      if (this.character.caste == "Ranger") {
+	        this.character.strength = 40;
+	        this.character.agility = 70;
+	        this.character.luck = 50;
+	        this.character.mana = 30;
+	      }
+	      if (this.character.caste == "Rogue") {
+	        this.character.strength = 50;
+	        this.character.agility = 60;
+	        this.character.luck = 40;
+	        this.character.mana = 30;
+	      }
+	      if (this.character.caste == "Mage") {
+	        this.character.strength = 30;
+	        this.character.agility = 30;
+	        this.character.luck = 30;
+	        this.character.mana = 70;
+	      }
 	    }
 	  }
 	});
@@ -9900,7 +9938,40 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-show=\"!created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"characterName\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"caste\">\r\n    <option value=\"warrior\">Warrior</option>\r\n    <option value=\"ranger\">Ranger</option>\r\n    <option value=\"mage\">Mage</option>\r\n  </select>\r\n  <button @click.prevent=\"create\">Create</button>\r\n  <pre>\r\n    {{ $data | json }}\r\n  </pre>\r\n</div>"
+	module.exports = "<div>\r\n  <div v-show=\"!character.created\">\r\n    <h3>Enter your new character's name</h3>\r\n    <input type=\"text\" v-model=\"character.characterName\">\r\n    <h3>and their class</h3>\r\n    <select v-model=\"character.caste\">\r\n      <option value=\"Warrior\">Warrior</option>\r\n      <option value=\"Ranger\">Ranger</option>\r\n      <option value=\"Rogue\">Rogue</option>\r\n      <option value=\"Mage\">Mage</option>\r\n    </select>\r\n    <button @click.prevent=\"create\">Create</button>\r\n  </div>\r\n  <pre>{{ $data | json }}</pre>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n</div>"
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _statsComponentTemplate = __webpack_require__(6);
+
+	var _statsComponentTemplate2 = _interopRequireDefault(_statsComponentTemplate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var StatsComponent = _vue2.default.extend({
+	  template: _statsComponentTemplate2.default,
+	  props: ['character']
+	});
+
+	exports.default = StatsComponent;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\r\n  <h3>{{ character.characterName }}</h3>\r\n  <h3>Class: {{ character.caste }}</h3>\r\n  <h3>Strength: {{ character.strength }}</h3>\r\n  <h3>Agility: {{ character.agility }}</h3>\r\n  <h3>Luck: {{ character.luck }}</h3>\r\n  <h3>Mana: {{ character.mana }}</h3>\r\n</div>"
 
 /***/ }
 /******/ ]);
