@@ -1,6 +1,6 @@
 <div>
-  <pre>{{ $data | json }}</pre>
   <creator-component v-show="!character.created" :character="character"></creator-component>
   <stats-component v-show="character.created" :character="character"></stats-component>
   <explore-component v-show="character.created" :character="character"></explore-component>
+  <pre>{{ $data | json }}</pre>
 </div>

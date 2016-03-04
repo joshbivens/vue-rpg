@@ -14,7 +14,7 @@ const AppComponent = Vue.extend({
   data() {
     return {
       character: {
-        characterName: '',
+        name: '',
         caste: '',
         hp: 100,
         strength: 0,
@@ -24,7 +24,7 @@ const AppComponent = Vue.extend({
         created: false
       }
     }
-  },
+  }
 })
 
 export default AppComponent;
