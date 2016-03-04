@@ -9883,25 +9883,25 @@
 	  methods: {
 	    create: function create() {
 	      this.character.created = true;
-	      if (this.character.caste == "Warrior") {
+	      if (this.character.caste == "Cavalier") {
 	        this.character.strength = 80;
 	        this.character.agility = 30;
 	        this.character.luck = 30;
 	        this.character.mana = 10;
 	      }
-	      if (this.character.caste == "Ranger") {
+	      if (this.character.caste == "Hunter") {
 	        this.character.strength = 40;
 	        this.character.agility = 70;
-	        this.character.luck = 50;
-	        this.character.mana = 30;
+	        this.character.luck = 40;
+	        this.character.mana = 20;
 	      }
-	      if (this.character.caste == "Rogue") {
+	      if (this.character.caste == "Assassin") {
 	        this.character.strength = 50;
 	        this.character.agility = 60;
 	        this.character.luck = 40;
 	        this.character.mana = 30;
 	      }
-	      if (this.character.caste == "Mage") {
+	      if (this.character.caste == "Shaman") {
 	        this.character.strength = 30;
 	        this.character.agility = 30;
 	        this.character.luck = 30;
@@ -9917,7 +9917,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.characterName\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Warrior\">Warrior</option>\r\n    <option value=\"Ranger\">Ranger</option>\r\n    <option value=\"Rogue\">Rogue</option>\r\n    <option value=\"Mage\">Mage</option>\r\n  </select>\r\n  <button @click.prevent=\"create\">Create</button>\r\n</div>"
+	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click.prevent=\"create\">Create</button>\r\n</div>"
 
 /***/ },
 /* 5 */
@@ -9950,7 +9950,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3>{{ character.characterName }}</h3>\r\n  <h3>Class: {{ character.caste }}</h3>\r\n  <h3>Strength: {{ character.strength }}</h3>\r\n  <h3>Agility: {{ character.agility }}</h3>\r\n  <h3>Luck: {{ character.luck }}</h3>\r\n  <h3>Mana: {{ character.mana }}</h3>\r\n</div>"
+	module.exports = "<div>\r\n  <p>{{ character.characterName }}</p>\r\n  <p>Class: {{ character.caste }}</p>\r\n  <p>Strength: {{ character.strength }}</p>\r\n  <p>Agility: {{ character.agility }}</p>\r\n  <p>Luck: {{ character.luck }}</p>\r\n  <p>Mana: {{ character.mana }}</p>\r\n</div>"
 
 /***/ },
 /* 7 */
@@ -9974,16 +9974,33 @@
 
 	var ExploreComponent = _vue2.default.extend({
 	  template: _exploreComponentTemplate2.default,
-	  props: ['character']
+	  props: ['character'],
+	  data: function data() {
+	    return {
+	      dungeons: dungeons,
+	      villages: villages,
+	      items: items
+	    };
+	  }
 	});
 
 	exports.default = ExploreComponent;
+
+
+	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Cavens", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest"];
+
+	var villages = ["Ortul", "Calestrii", "Forest of Light", "Eldevin", "Nessus", "Thrax"];
+
+	var items = {
+	  weapons: {},
+	  armor: {}
+	};
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3>Roam the land, fight monsters, and find gear!</h3>\r\n  <h4>{{ character.characterName }}</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <h3>Roam the land, fight monsters, and find gear!</h3>\r\n  <h4>{{ character.characterName }}</h4>\r\n  <h4>{{ dungeons[0] }}</h4>\r\n</div>"
 
 /***/ },
 /* 9 */
@@ -10027,7 +10044,7 @@
 	  data: function data() {
 	    return {
 	      character: {
-	        characterName: '',
+	        name: '',
 	        caste: '',
 	        hp: 100,
 	        strength: 0,
@@ -10046,7 +10063,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <pre>{{ $data | json }}</pre>\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n</div>"
+	module.exports = "<div>\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n  <pre>{{ $data | json }}</pre>\r\n</div>"
 
 /***/ }
 /******/ ]);
