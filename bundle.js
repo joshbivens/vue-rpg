@@ -9981,6 +9981,17 @@
 	      villages: villages,
 	      items: items
 	    };
+	  },
+
+	  filters: {
+	    randomize: function randomize(arr) {
+	      return arr[Math.floor(Math.random() * arr.length)];
+	    }
+	  },
+	  computed: {
+	    randomItem: function randomItem() {
+	      return items[Math.floor(Math.random() * items.length)].name;
+	    }
 	  }
 	});
 
@@ -9991,16 +10002,19 @@
 
 	var villages = ["Ortul", "Calestrii", "Forest of Light", "Eldevin", "Nessus", "Thrax"];
 
-	var items = {
-	  weapons: {},
-	  armor: {}
-	};
+	var items = [{
+	  name: "Wand of Wilding"
+	}, {
+	  name: "Halberd of Distort"
+	}, {
+	  name: "Coat of Valor"
+	}];
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3>Roam the land, fight monsters, and find gear!</h3>\r\n  <h4>{{ character.characterName }}</h4>\r\n  <h4>{{ dungeons[0] }}</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <h3>Roam the land, fight monsters, and find gear!</h3>\r\n  <h4>{{ character.name }} found the {{ randomItem }} in the {{ dungeons | randomize }}</h4>\r\n</div>"
 
 /***/ },
 /* 9 */

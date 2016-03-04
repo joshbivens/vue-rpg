@@ -10,6 +10,16 @@ const ExploreComponent = Vue.extend({
       villages: villages,
       items: items
     }
+  },
+  filters: {
+    randomize(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+  },
+  computed: {
+    randomItem() {
+      return items[Math.floor(Math.random() * items.length)].name;
+    }
   }
 })
 
@@ -34,11 +44,14 @@ var villages = [
   "Thrax"
 ];
 
-var items = {
-  weapons: {
-    
+var items = [
+  {
+    name: "Wand of Wilding"
   },
-  armor: {
-    
+  {
+    name: "Halberd of Distort"
+  },
+  {
+    name: "Coat of Valor"
   }
-}
+];
