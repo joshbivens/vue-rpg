@@ -9879,12 +9879,17 @@
 
 	var _statsComponent2 = _interopRequireDefault(_statsComponent);
 
+	var _exploreComponent = __webpack_require__(7);
+
+	var _exploreComponent2 = _interopRequireDefault(_exploreComponent);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var CreatorComponent = _vue2.default.extend({
 	  template: _creatorComponentTemplate2.default,
 	  components: {
-	    'stats-component': _statsComponent2.default
+	    'stats-component': _statsComponent2.default,
+	    "explore-component": _exploreComponent2.default
 	  },
 	  data: function data() {
 	    return {
@@ -9938,7 +9943,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <div v-show=\"!character.created\">\r\n    <h3>Enter your new character's name</h3>\r\n    <input type=\"text\" v-model=\"character.characterName\">\r\n    <h3>and their class</h3>\r\n    <select v-model=\"character.caste\">\r\n      <option value=\"Warrior\">Warrior</option>\r\n      <option value=\"Ranger\">Ranger</option>\r\n      <option value=\"Rogue\">Rogue</option>\r\n      <option value=\"Mage\">Mage</option>\r\n    </select>\r\n    <button @click.prevent=\"create\">Create</button>\r\n  </div>\r\n  <pre>{{ $data | json }}</pre>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n</div>"
+	module.exports = "<div>\n  <div v-show=\"!character.created\">\n    <h3>Enter your new character's name</h3>\n    <input type=\"text\" v-model=\"character.characterName\">\n    <h3>and their class</h3>\n    <select v-model=\"character.caste\">\n      <option value=\"Warrior\">Warrior</option>\n      <option value=\"Ranger\">Ranger</option>\n      <option value=\"Rogue\">Rogue</option>\n      <option value=\"Mage\">Mage</option>\n    </select>\n    <button @click.prevent=\"create\">Create</button>\n  </div>\n  <pre>{{ $data | json }}</pre>\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\n</div>"
 
 /***/ },
 /* 5 */
@@ -9971,7 +9976,40 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3>{{ character.characterName }}</h3>\r\n  <h3>Class: {{ character.caste }}</h3>\r\n  <h3>Strength: {{ character.strength }}</h3>\r\n  <h3>Agility: {{ character.agility }}</h3>\r\n  <h3>Luck: {{ character.luck }}</h3>\r\n  <h3>Mana: {{ character.mana }}</h3>\r\n</div>"
+	module.exports = "<div>\n  <h3>{{ character.characterName }}</h3>\n  <h3>Class: {{ character.caste }}</h3>\n  <h3>Strength: {{ character.strength }}</h3>\n  <h3>Agility: {{ character.agility }}</h3>\n  <h3>Luck: {{ character.luck }}</h3>\n  <h3>Mana: {{ character.mana }}</h3>\n</div>"
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _exploreComponentTemplate = __webpack_require__(8);
+
+	var _exploreComponentTemplate2 = _interopRequireDefault(_exploreComponentTemplate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ExploreComponent = _vue2.default.extend({
+	  template: _exploreComponentTemplate2.default,
+	  props: ['character']
+	});
+
+	exports.default = ExploreComponent;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\n  <h3>Roam the land, fight monsters, and find gear!</h3>\n  <h4>{{ character.characterName }}</h4>\n</div>"
 
 /***/ }
 /******/ ]);

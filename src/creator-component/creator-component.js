@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import template from './creator-component-template.html';
 import StatsComponent from '../stats-component/stats-component';
+import ExploreComponent from '../explore-component/explore-component';
 
 const CreatorComponent = Vue.extend({
   template,
   components: {
-    'stats-component': StatsComponent
+    'stats-component': StatsComponent,
+    "explore-component": ExploreComponent
   },
   data() {
     return {
