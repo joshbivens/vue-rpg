@@ -1,17 +1,12 @@
-<div>
-  <div v-show="!character.created">
-    <h3>Enter your new character's name</h3>
-    <input type="text" v-model="character.characterName">
-    <h3>and their class</h3>
-    <select v-model="character.caste">
-      <option value="Warrior">Warrior</option>
-      <option value="Ranger">Ranger</option>
-      <option value="Rogue">Rogue</option>
-      <option value="Mage">Mage</option>
-    </select>
-    <button @click.prevent="create">Create</button>
-  </div>
-  <pre>{{ $data | json }}</pre>
-  <stats-component v-show="character.created" :character="character"></stats-component>
-  <explore-component v-show="character.created" :character="character"></explore-component>
+<div v-show="!character.created">
+  <h3>Enter your new character's name</h3>
+  <input type="text" v-model="character.characterName">
+  <h3>and their class</h3>
+  <select v-model="character.caste">
+    <option value="Warrior">Warrior</option>
+    <option value="Ranger">Ranger</option>
+    <option value="Rogue">Rogue</option>
+    <option value="Mage">Mage</option>
+  </select>
+  <button @click.prevent="create">Create</button>
 </div>

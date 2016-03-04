@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import CreatorComponent from './creator-component/creator-component';
+import AppComponent from './app-component/app-component';
 
 new Vue({
   el: '#app',
   components: {
-    'creator-component': CreatorComponent
+    'app-component': AppComponent
   }
 })

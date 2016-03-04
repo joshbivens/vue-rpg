@@ -1,28 +1,9 @@
 import Vue from 'vue';
 import template from './creator-component-template.html';
-import StatsComponent from '../stats-component/stats-component';
-import ExploreComponent from '../explore-component/explore-component';
 
 const CreatorComponent = Vue.extend({
   template,
-  components: {
-    'stats-component': StatsComponent,
-    "explore-component": ExploreComponent
-  },
-  data() {
-    return {
-      character: {
-        characterName: '',
-        caste: '',
-        hp: 100,
-        strength: 0,
-        agility: 0,
-        luck: 0,
-        mana: 0,
-        created: false
-      }
-    }
-  },
+  props: ['character'],
   methods: {
     create() {
       this.character.created = true;
