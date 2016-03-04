@@ -8,17 +8,31 @@ const ExploreComponent = Vue.extend({
     return {
       dungeons: dungeons,
       villages: villages,
-      items: items
+      items: items,
+      dungeon: '',
+      monster: '',
+      village: '',
+      item: '',
+      exploring: false,
+      shopping: false
     }
   },
-  filters: {
-    randomize(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
-  },
-  computed: {
-    randomItem() {
-      return items[Math.floor(Math.random() * items.length)].name;
+  methods: {
+    explore() {
+      var dungeon = dungeons[Math.floor(Math.random() * dungeons.length)];
+      var monster = monsters[Math.floor(Math.random() * monsters.length)].name;
+      this.dungeon = dungeon;
+      this.monster = monster;
+      this.exploring = true;
+      this.shopping = false;
+    },
+    shop() {
+      var village = villages[Math.floor(Math.random() * villages.length)];
+      var item = items[Math.floor(Math.random() * items.length)].name;
+      this.item = item;
+      this.village = village;
+      this.shopping = true;
+      this.exploring = false;
     }
   }
 })
@@ -42,6 +56,18 @@ var villages = [
   "Eldevin",
   "Nessus",
   "Thrax"
+];
+
+var monsters = [
+  {
+    name: "Rabid Basilisk"
+  },
+  {
+    name: "Spooky Skellington"
+  },
+  {
+    name: "Raging Warbeast of the Abyss"
+  }
 ];
 
 var items = [
