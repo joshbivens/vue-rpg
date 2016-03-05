@@ -9948,30 +9948,34 @@
 	  props: ['character'],
 	  methods: {
 	    create: function create() {
-	      this.character.created = true;
-	      if (this.character.caste == "Cavalier") {
-	        this.character.strength = 80;
-	        this.character.agility = 30;
-	        this.character.luck = 30;
-	        this.character.mana = 10;
-	      }
-	      if (this.character.caste == "Hunter") {
-	        this.character.strength = 40;
-	        this.character.agility = 70;
-	        this.character.luck = 40;
-	        this.character.mana = 20;
-	      }
-	      if (this.character.caste == "Assassin") {
-	        this.character.strength = 50;
-	        this.character.agility = 60;
-	        this.character.luck = 40;
-	        this.character.mana = 30;
-	      }
-	      if (this.character.caste == "Shaman") {
-	        this.character.strength = 30;
-	        this.character.agility = 30;
-	        this.character.luck = 30;
-	        this.character.mana = 70;
+	      if (this.character.name) {
+	        this.character.created = true;
+	        if (this.character.caste == "Cavalier") {
+	          this.character.strength = 80;
+	          this.character.agility = 30;
+	          this.character.luck = 30;
+	          this.character.mana = 10;
+	        }
+	        if (this.character.caste == "Hunter") {
+	          this.character.strength = 40;
+	          this.character.agility = 70;
+	          this.character.luck = 40;
+	          this.character.mana = 20;
+	        }
+	        if (this.character.caste == "Assassin") {
+	          this.character.strength = 50;
+	          this.character.agility = 60;
+	          this.character.luck = 40;
+	          this.character.mana = 30;
+	        }
+	        if (this.character.caste == "Shaman") {
+	          this.character.strength = 30;
+	          this.character.agility = 30;
+	          this.character.luck = 30;
+	          this.character.mana = 70;
+	        }
+	      } else {
+	        alert("Please enter a name for your character");
 	      }
 	    }
 	  }
@@ -10223,7 +10227,7 @@
 	      }
 	      this.newItems = newItems;
 	      this.village = village;
-	      this.shopping = true;
+	      this.shopping = !this.shopping;
 	    }
 	  }
 	});
@@ -10263,7 +10267,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"shop\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div>\r\n      <h4>Village of {{ village }}</h4>\r\n      <h4>{{ character.gold }} gold</h4>\r\n      <ul>\r\n        <li v-for=\"item in newItems\">\r\n          <h4>{{ item.name }} - {{ item.cost }}g | <span>BUY</span></h4>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }
 /******/ ]);

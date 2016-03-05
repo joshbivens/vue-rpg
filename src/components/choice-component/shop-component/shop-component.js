@@ -25,7 +25,7 @@ const ShopComponent = Vue.extend({
       }
       this.newItems = newItems;
       this.village = village;
-      this.shopping = true;
+      this.shopping = !this.shopping;
     }
   }
 });

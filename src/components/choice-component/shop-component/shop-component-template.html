@@ -1,12 +1,13 @@
 <div>
-  <button @click="shop">Let's Shop</button>
+  <button @click="shop" v-if="!shopping">Let's Shop</button>
   <div v-if="shopping">
-    <div>
-      <h4>Village of {{ village }}</h4>
-      <h4>{{ character.gold }} gold</h4>
+    <div id="shop">
+      <div>
+        <h4>Village of {{ village }} - {{ character.gold }} gold</h4>
+      </div>
       <ul>
         <li v-for="item in newItems">
-          <h4>{{ item.name }} - {{ item.cost }}g | <span>BUY</span></h4>
+          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>
           <ul>
             <li>HP: {{ item.hp }}</li>
             <li>Strength: {{ item.strength }}</li>
