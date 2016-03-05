@@ -1,0 +1,8 @@
+<div>
+  <h3 v-if="!shopping && !exploring">Roam the land, fight monsters, and find gear!</h3>
+  <button @click="explore">Go Exploring</button>
+  <button @click="shop">Visit a Village</button>
+  <explore-component :character="character" v-if="!shopping && exploring"></explore-component>
+  <shop-component :character="character" v-if="!exploring && shopping"></shop-component>
+</div>
+
