@@ -2,6 +2,44 @@
   <h3>Enter your new character's name</h3>
   <input type="text" v-model="character.name">
   <h3>and their class</h3>
+  <div class="row">
+    <div class="three columns">
+      <h5>Cavalier</h5>
+      <ul>
+        <li>Strength: 80</li>
+        <li>Agility: 30</li>
+        <li>Luck: 30</li>
+        <li>Mana: 10</li>
+      </ul>
+    </div>
+    <div class="three columns">
+      <h5>Hunter</h5>
+      <ul>
+        <li>Strength: 40</li>
+        <li>Agility: 50</li>
+        <li>Luck: 40</li>
+        <li>Mana: 20</li>
+      </ul>
+    </div>
+    <div class="three columns">
+      <h5>Assassin</h5>
+      <ul>
+        <li>Strength: 30</li>
+        <li>Agility: 50</li>
+        <li>Luck: 50</li>
+        <li>Mana: 20</li>
+      </ul>
+    </div>
+    <div class="three columns">
+      <h5>Shaman</h5>
+      <ul>
+        <li>Strength: 20</li>
+        <li>Agility: 30</li>
+        <li>Luck: 30</li>
+        <li>Mana: 70</li>
+      </ul>
+    </div>
+  </div>
   <select v-model="character.caste">
     <option value="Cavalier" selected>Cavalier</option>
     <option value="Hunter">Hunter</option>

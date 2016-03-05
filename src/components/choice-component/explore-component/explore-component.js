@@ -17,9 +17,10 @@ const ExploreComponent = Vue.extend({
   methods: {
     explore() {
       var dungeon = this.dungeons[_.random(this.dungeons.length)];
-      var monster = this.monsters[_.random(this.monsters.length)].name;  
+      var monster = this.monsters[_.random(this.monsters.length)];
+      var monsterName = monster.name;  
       this.dungeon = dungeon;
-      this.monster = monster;
+      this.monsterName = monsterName;
       this.exploring = true;
     }
   }
@@ -70,11 +71,10 @@ var monsters = [
     attack: 10
   },
   {
-    name: "Black Dragon of the Dark Forest",
+    name: "Black Dragon",
     hp: 500,
     attack: 50
   },
-  
   {
     name: "Raging Warbeast of the Abyss",
     hp: 1000,

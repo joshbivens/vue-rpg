@@ -9987,7 +9987,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n</div>"
+	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <div class=\"row\">\r\n    <div class=\"three columns\">\r\n      <h5>Cavalier</h5>\r\n      <ul>\r\n        <li>Strength: 80</li>\r\n        <li>Agility: 30</li>\r\n        <li>Luck: 30</li>\r\n        <li>Mana: 10</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns\">\r\n      <h5>Hunter</h5>\r\n      <ul>\r\n        <li>Strength: 40</li>\r\n        <li>Agility: 50</li>\r\n        <li>Luck: 40</li>\r\n        <li>Mana: 20</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns\">\r\n      <h5>Assassin</h5>\r\n      <ul>\r\n        <li>Strength: 30</li>\r\n        <li>Agility: 50</li>\r\n        <li>Luck: 50</li>\r\n        <li>Mana: 20</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns\">\r\n      <h5>Shaman</h5>\r\n      <ul>\r\n        <li>Strength: 20</li>\r\n        <li>Agility: 30</li>\r\n        <li>Luck: 30</li>\r\n        <li>Mana: 70</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n</div>"
 
 /***/ },
 /* 7 */
@@ -10135,9 +10135,10 @@
 	  methods: {
 	    explore: function explore() {
 	      var dungeon = this.dungeons[_lodash2.default.random(this.dungeons.length)];
-	      var monster = this.monsters[_lodash2.default.random(this.monsters.length)].name;
+	      var monster = this.monsters[_lodash2.default.random(this.monsters.length)];
+	      var monsterName = monster.name;
 	      this.dungeon = dungeon;
-	      this.monster = monster;
+	      this.monsterName = monsterName;
 	      this.exploring = true;
 	    }
 	  }
@@ -10173,7 +10174,7 @@
 	  hp: 25,
 	  attack: 10
 	}, {
-	  name: "Black Dragon of the Dark Forest",
+	  name: "Black Dragon",
 	  hp: 500,
 	  attack: 50
 	}, {
@@ -10186,7 +10187,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\">Explore</button>\r\n  <h4 v-if=\"exploring\">{{ character.name }} encounters a {{ monster }} in the {{ dungeon }}</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-if=\"!exploring\">Explore</button>\r\n  <h4 v-if=\"exploring\">{{ character.name }} encounters a {{ monsterName }} in the {{ dungeon }}</h4>\r\n</div>"
 
 /***/ },
 /* 13 */
