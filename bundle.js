@@ -10055,7 +10055,7 @@
 
 	var _exploreComponent2 = _interopRequireDefault(_exploreComponent);
 
-	var _shopComponent = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./shop-component/shop-component\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _shopComponent = __webpack_require__(13);
 
 	var _shopComponent2 = _interopRequireDefault(_shopComponent);
 
@@ -10189,8 +10189,90 @@
 	module.exports = "<div>\r\n  <button @click=\"explore\">Explore</button>\r\n  <h4 v-if=\"exploring\">{{ character.name }} encounters a {{ monster }} in the {{ dungeon }}</h4>\r\n</div>"
 
 /***/ },
-/* 13 */,
-/* 14 */,
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _lodash = __webpack_require__(15);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	var _shopComponentTemplate = __webpack_require__(14);
+
+	var _shopComponentTemplate2 = _interopRequireDefault(_shopComponentTemplate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ShopComponent = _vue2.default.extend({
+	  template: _shopComponentTemplate2.default,
+	  props: ['character'],
+	  data: function data() {
+	    return {
+	      villages: villages,
+	      items: items,
+	      village: '',
+	      newItems: [],
+	      shopping: false
+	    };
+	  },
+
+	  methods: {
+	    shop: function shop() {
+	      var village = this.villages[_lodash2.default.random(this.villages.length)];
+	      this.newItems = _lodash2.default.sampleSize(this.items, 3);
+	      this.village = village;
+	      this.shopping = !this.shopping;
+	    }
+	  }
+	}); // We actually want to show a list of available items with prices. You get gold from killing monsters. Maybe a loop that goes through the items array and pushes three randos, and THAT list is what's displayed as 'for sale'.
+
+	exports.default = ShopComponent;
+
+
+	var villages = ["Ortul", "Calestrii", "the Forest of Light", "Eldevin", "Nessus", "Thrax"];
+
+	var items = [{
+	  name: "Wand of Wilding",
+	  cost: 20,
+	  hp: 0,
+	  strength: 10,
+	  agility: 10,
+	  luck: -10,
+	  mana: 20
+	}, {
+	  name: "Halberd of Distortion",
+	  cost: 30,
+	  hp: 0,
+	  strength: 20,
+	  agility: -5,
+	  luck: 0,
+	  mana: 20
+	}, {
+	  name: "Coat of Valor",
+	  cost: 50,
+	  hp: 10,
+	  strength: 10,
+	  agility: 10,
+	  luck: 10,
+	  mana: 0
+	}];
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\" track-by=\"$index\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+
+/***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 

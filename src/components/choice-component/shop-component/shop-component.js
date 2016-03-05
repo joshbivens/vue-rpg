@@ -18,7 +18,7 @@ const ShopComponent = Vue.extend({
   },
   methods: {
     shop() {
-      var village = this.villages[-.random(this.villages.length)];
+      var village = this.villages[_.random(this.villages.length)];
       this.newItems = _.sampleSize(this.items, 3);
       this.village = village;
       this.shopping = !this.shopping;
