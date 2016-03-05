@@ -13,3 +13,12 @@ input, select {
 .app-component {
   margin-top: 75px;
 }
+
+.active {
+  background: tomato;
+  color: #fff !important;
+}
+
+.passive {
+  background: #bbb;
+}

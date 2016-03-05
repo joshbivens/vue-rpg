@@ -10088,7 +10088,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3 v-if=\"!shopping && !exploring\">Roam the land, fight monsters, and find gear!</h3>\r\n  <button @click=\"explore\">Go Exploring</button>\r\n  <button @click=\"shop\">Visit a Village</button>\r\n  <explore-component :character=\"character\" v-if=\"!shopping && exploring\"></explore-component>\r\n  <shop-component :character=\"character\" v-if=\"!exploring && shopping\"></shop-component>\r\n</div>\r\n\r\n"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-bind:class=\"{ 'active': exploring, 'passive': shopping }\">Go Exploring</button>\r\n  <button @click=\"shop\" v-bind:class=\"{ 'active': shopping, 'passive': exploring }\">Visit a Village</button>\r\n  <explore-component :character=\"character\" v-if=\"exploring\"></explore-component>\r\n  <shop-component :character=\"character\" v-if=\"shopping\"></shop-component>\r\n</div>\r\n\r\n"
 
 /***/ },
 /* 11 */
