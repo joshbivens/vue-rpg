@@ -1,8 +1,11 @@
 <div>
-  <p>{{ character.characterName }}</p>
-  <p>Class: {{ character.caste }}</p>
-  <p>Strength: {{ character.strength }}</p>
-  <p>Agility: {{ character.agility }}</p>
-  <p>Luck: {{ character.luck }}</p>
-  <p>Mana: {{ character.mana }}</p>
+  <button @click="show">Stats</button>
+  <div v-if="stats">
+    <p>{{ character.characterName }}</p>
+    <p>Class: {{ character.caste }}</p>
+    <p>Strength: {{ character.strength }}</p>
+    <p>Agility: {{ character.agility }}</p>
+    <p>Luck: {{ character.luck }}</p>
+    <p>Mana: {{ character.mana }}</p>
+  </div>
 </div>

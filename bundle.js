@@ -10006,7 +10006,18 @@
 
 	var StatsComponent = _vue2.default.extend({
 	  template: _statsComponentTemplate2.default,
-	  props: ['character']
+	  props: ['character'],
+	  data: function data() {
+	    return {
+	      stats: false
+	    };
+	  },
+
+	  methods: {
+	    show: function show() {
+	      this.stats = !this.stats;
+	    }
+	  }
 	});
 
 	exports.default = StatsComponent;
@@ -10015,7 +10026,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <p>{{ character.characterName }}</p>\r\n  <p>Class: {{ character.caste }}</p>\r\n  <p>Strength: {{ character.strength }}</p>\r\n  <p>Agility: {{ character.agility }}</p>\r\n  <p>Luck: {{ character.luck }}</p>\r\n  <p>Mana: {{ character.mana }}</p>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\">\r\n    <p>{{ character.characterName }}</p>\r\n    <p>Class: {{ character.caste }}</p>\r\n    <p>Strength: {{ character.strength }}</p>\r\n    <p>Agility: {{ character.agility }}</p>\r\n    <p>Luck: {{ character.luck }}</p>\r\n    <p>Mana: {{ character.mana }}</p>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 9 */
@@ -10124,14 +10135,40 @@
 	exports.default = ExploreComponent;
 
 
-	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Caverns", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest"];
+	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Caverns", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest", "Lake of Lorne"];
 
 	var monsters = [{
-	  name: "Rabid Basilisk"
+	  name: "Simple Slime",
+	  hp: 10,
+	  attack: 0
 	}, {
-	  name: "Spooky Skellington"
+	  name: "Complex Slime",
+	  hp: 20,
+	  attack: 5
 	}, {
-	  name: "Raging Warbeast of the Abyss"
+	  name: "Common Basilisk",
+	  hp: 30,
+	  attack: 15
+	}, {
+	  name: "Rabid Basilisk",
+	  hp: 40,
+	  attack: 25
+	}, {
+	  name: "Simple Skellington",
+	  hp: 25,
+	  attack: 5
+	}, {
+	  name: "Spooky Skellington",
+	  hp: 25,
+	  attack: 10
+	}, {
+	  name: "Black Dragon of the Dark Forest",
+	  hp: 500,
+	  attack: 50
+	}, {
+	  name: "Raging Warbeast of the Abyss",
+	  hp: 1000,
+	  attack: 100
 	}];
 
 /***/ },
