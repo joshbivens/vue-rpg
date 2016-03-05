@@ -9,15 +9,21 @@ const ShopComponent = Vue.extend({
   data() {
     return {
       village: '',
-      item: '',
+      newItems: [],
       shopping: false
     }
   },
   methods: {
     shop() {
       var village = villages[Math.floor(Math.random() * villages.length)];
-      var item = items[Math.floor(Math.random() * items.length)].name;
-      this.item = item;
+      
+      var newItems = [];
+      for (var i = 0, x = items.length; i < 3; i++) {
+        var item = items[Math.floor(Math.random() * items.length)];
+        newItems.push(item);
+        console.log(newItems);
+      }
+      this.newItems = newItems;
       this.village = village;
       this.shopping = true;
     }
@@ -37,12 +43,30 @@ var villages = [
 
 var items = [
   {
-    name: "Wand of Wilding"
+    name: "Wand of Wilding",
+    cost: 20,
+    hp: 0,
+    strength: 10,
+    agility: 10,
+    luck: -10,
+    mana: 20
   },
   {
-    name: "Halberd of Distort"
+    name: "Halberd of Distortion",
+    cost: 30,
+    hp: 0,
+    strength: 20,
+    agility: -5,
+    luck: 0,
+    mana: 20
   },
   {
-    name: "Coat of Valor"
+    name: "Coat of Valor",
+    cost: 50,
+    hp: 10,
+    strength: 10,
+    agility: 10,
+    luck: 10,
+    mana: 0
   }
 ];

@@ -16,6 +16,7 @@ const AppComponent = Vue.extend({
       character: {
         name: '',
         caste: '',
+        gold: 30,
         hp: 100,
         strength: 0,
         agility: 0,

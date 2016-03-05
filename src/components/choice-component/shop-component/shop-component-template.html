@@ -1,4 +1,21 @@
 <div>
   <button @click="shop">Let's Shop</button>
-  <h4 v-if="shopping">{{ character.name }} finds the {{ item }} for sale in {{ village }}</h4>
+  <div v-if="shopping">
+    <div>
+      <h4>Village of {{ village }}</h4>
+      <h4>{{ character.gold }} gold</h4>
+      <ul>
+        <li v-for="item in newItems">
+          <h4>{{ item.name }} - {{ item.cost }}g | <span>BUY</span></h4>
+          <ul>
+            <li>HP: {{ item.hp }}</li>
+            <li>Strength: {{ item.strength }}</li>
+            <li>Agility: {{ item.agility }}</li>
+            <li>Luck: {{ item.luck }}</li>
+            <li>Mana: {{ item.mana }}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

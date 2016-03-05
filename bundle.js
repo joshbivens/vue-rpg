@@ -9901,6 +9901,7 @@
 	      character: {
 	        name: '',
 	        caste: '',
+	        gold: 30,
 	        hp: 100,
 	        strength: 0,
 	        agility: 0,
@@ -10205,7 +10206,7 @@
 	  data: function data() {
 	    return {
 	      village: '',
-	      item: '',
+	      newItems: [],
 	      shopping: false
 	    };
 	  },
@@ -10213,8 +10214,14 @@
 	  methods: {
 	    shop: function shop() {
 	      var village = villages[Math.floor(Math.random() * villages.length)];
-	      var item = items[Math.floor(Math.random() * items.length)].name;
-	      this.item = item;
+
+	      var newItems = [];
+	      for (var i = 0, x = items.length; i < 3; i++) {
+	        var item = items[Math.floor(Math.random() * items.length)];
+	        newItems.push(item);
+	        console.log(newItems);
+	      }
+	      this.newItems = newItems;
 	      this.village = village;
 	      this.shopping = true;
 	    }
@@ -10227,18 +10234,36 @@
 	var villages = ["Ortul", "Calestrii", "Forest of Light", "Eldevin", "Nessus", "Thrax"];
 
 	var items = [{
-	  name: "Wand of Wilding"
+	  name: "Wand of Wilding",
+	  cost: 20,
+	  hp: 0,
+	  strength: 10,
+	  agility: 10,
+	  luck: -10,
+	  mana: 20
 	}, {
-	  name: "Halberd of Distort"
+	  name: "Halberd of Distortion",
+	  cost: 30,
+	  hp: 0,
+	  strength: 20,
+	  agility: -5,
+	  luck: 0,
+	  mana: 20
 	}, {
-	  name: "Coat of Valor"
+	  name: "Coat of Valor",
+	  cost: 50,
+	  hp: 10,
+	  strength: 10,
+	  agility: 10,
+	  luck: 10,
+	  mana: 0
 	}];
 
 /***/ },
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"shop\">Let's Shop</button>\r\n  <h4 v-if=\"shopping\">{{ character.name }} finds the {{ item }} for sale in {{ village }}</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"shop\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div>\r\n      <h4>Village of {{ village }}</h4>\r\n      <h4>{{ character.gold }} gold</h4>\r\n      <ul>\r\n        <li v-for=\"item in newItems\">\r\n          <h4>{{ item.name }} - {{ item.cost }}g | <span>BUY</span></h4>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }
 /******/ ]);
