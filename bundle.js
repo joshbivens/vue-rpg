@@ -50,7 +50,7 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _appComponent = __webpack_require__(9);
+	var _appComponent = __webpack_require__(3);
 
 	var _appComponent2 = _interopRequireDefault(_appComponent);
 
@@ -9871,7 +9871,72 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _creatorComponentTemplate = __webpack_require__(4);
+	var _appComponentTemplate = __webpack_require__(4);
+
+	var _appComponentTemplate2 = _interopRequireDefault(_appComponentTemplate);
+
+	var _creatorComponent = __webpack_require__(5);
+
+	var _creatorComponent2 = _interopRequireDefault(_creatorComponent);
+
+	var _statsComponent = __webpack_require__(7);
+
+	var _statsComponent2 = _interopRequireDefault(_statsComponent);
+
+	var _choiceComponent = __webpack_require__(9);
+
+	var _choiceComponent2 = _interopRequireDefault(_choiceComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var AppComponent = _vue2.default.extend({
+	  template: _appComponentTemplate2.default,
+	  components: {
+	    'creator-component': _creatorComponent2.default,
+	    'stats-component': _statsComponent2.default,
+	    'choice-component': _choiceComponent2.default
+	  },
+	  data: function data() {
+	    return {
+	      character: {
+	        name: '',
+	        caste: '',
+	        hp: 100,
+	        strength: 0,
+	        agility: 0,
+	        luck: 0,
+	        mana: 0,
+	        created: false,
+	        exploring: false,
+	        shopping: false
+	      }
+	    };
+	  }
+	});
+
+	exports.default = AppComponent;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"app-component\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <choice-component v-show=\"character.created\" :character=\"character\"></choice-component>\r\n  <pre>{{ $data | json }}</pre>\r\n</div>"
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _creatorComponentTemplate = __webpack_require__(6);
 
 	var _creatorComponentTemplate2 = _interopRequireDefault(_creatorComponentTemplate);
 
@@ -9914,43 +9979,10 @@
 	exports.default = CreatorComponent;
 
 /***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click.prevent=\"create\">Create</button>\r\n</div>"
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _vue = __webpack_require__(1);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	var _statsComponentTemplate = __webpack_require__(6);
-
-	var _statsComponentTemplate2 = _interopRequireDefault(_statsComponentTemplate);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var StatsComponent = _vue2.default.extend({
-	  template: _statsComponentTemplate2.default,
-	  props: ['character']
-	});
-
-	exports.default = StatsComponent;
-
-/***/ },
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <p>{{ character.characterName }}</p>\r\n  <p>Class: {{ character.caste }}</p>\r\n  <p>Strength: {{ character.strength }}</p>\r\n  <p>Agility: {{ character.agility }}</p>\r\n  <p>Luck: {{ character.luck }}</p>\r\n  <p>Mana: {{ character.mana }}</p>\r\n</div>"
+	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n</div>"
 
 /***/ },
 /* 7 */
@@ -9966,77 +9998,24 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _exploreComponentTemplate = __webpack_require__(8);
+	var _statsComponentTemplate = __webpack_require__(8);
 
-	var _exploreComponentTemplate2 = _interopRequireDefault(_exploreComponentTemplate);
+	var _statsComponentTemplate2 = _interopRequireDefault(_statsComponentTemplate);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var ExploreComponent = _vue2.default.extend({
-	  template: _exploreComponentTemplate2.default,
-	  props: ['character'],
-	  data: function data() {
-	    return {
-	      dungeons: dungeons,
-	      villages: villages,
-	      items: items,
-	      dungeon: '',
-	      monster: '',
-	      village: '',
-	      item: '',
-	      exploring: false,
-	      shopping: false
-	    };
-	  },
-
-	  methods: {
-	    explore: function explore() {
-	      var dungeon = dungeons[Math.floor(Math.random() * dungeons.length)];
-	      var monster = monsters[Math.floor(Math.random() * monsters.length)].name;
-	      this.dungeon = dungeon;
-	      this.monster = monster;
-	      this.exploring = true;
-	      this.shopping = false;
-	    },
-	    shop: function shop() {
-	      var village = villages[Math.floor(Math.random() * villages.length)];
-	      var item = items[Math.floor(Math.random() * items.length)].name;
-	      this.item = item;
-	      this.village = village;
-	      this.shopping = true;
-	      this.exploring = false;
-	    }
-	  }
+	var StatsComponent = _vue2.default.extend({
+	  template: _statsComponentTemplate2.default,
+	  props: ['character']
 	});
 
-	exports.default = ExploreComponent;
-
-
-	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Cavens", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest"];
-
-	var villages = ["Ortul", "Calestrii", "Forest of Light", "Eldevin", "Nessus", "Thrax"];
-
-	var monsters = [{
-	  name: "Rabid Basilisk"
-	}, {
-	  name: "Spooky Skellington"
-	}, {
-	  name: "Raging Warbeast of the Abyss"
-	}];
-
-	var items = [{
-	  name: "Wand of Wilding"
-	}, {
-	  name: "Halberd of Distort"
-	}, {
-	  name: "Coat of Valor"
-	}];
+	exports.default = StatsComponent;
 
 /***/ },
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h3>Roam the land, fight monsters, and find gear!</h3>\r\n  <button @click.prevent=\"explore\">Go Exploring</button>\r\n  <button @click.prevent=\"shop\">Visit a Village</button>\r\n  <h4 v-if=\"shopping\">{{ character.name }} found the {{ item }} in {{ village }}</h4>\r\n  <h4 v-if=\"exploring\">{{ character.name }} encounters a {{ monster }} in the {{ dungeon }}!</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <p>{{ character.characterName }}</p>\r\n  <p>Class: {{ character.caste }}</p>\r\n  <p>Strength: {{ character.strength }}</p>\r\n  <p>Agility: {{ character.agility }}</p>\r\n  <p>Luck: {{ character.luck }}</p>\r\n  <p>Mana: {{ character.mana }}</p>\r\n</div>"
 
 /***/ },
 /* 9 */
@@ -10052,54 +10031,177 @@
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _appComponentTemplate = __webpack_require__(10);
+	var _choiceComponentTemplate = __webpack_require__(10);
 
-	var _appComponentTemplate2 = _interopRequireDefault(_appComponentTemplate);
+	var _choiceComponentTemplate2 = _interopRequireDefault(_choiceComponentTemplate);
 
-	var _creatorComponent = __webpack_require__(3);
-
-	var _creatorComponent2 = _interopRequireDefault(_creatorComponent);
-
-	var _statsComponent = __webpack_require__(5);
-
-	var _statsComponent2 = _interopRequireDefault(_statsComponent);
-
-	var _exploreComponent = __webpack_require__(7);
+	var _exploreComponent = __webpack_require__(11);
 
 	var _exploreComponent2 = _interopRequireDefault(_exploreComponent);
 
+	var _shopComponent = __webpack_require__(13);
+
+	var _shopComponent2 = _interopRequireDefault(_shopComponent);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var AppComponent = _vue2.default.extend({
-	  template: _appComponentTemplate2.default,
+	var ChoiceComponent = _vue2.default.extend({
+	  template: _choiceComponentTemplate2.default,
 	  components: {
-	    'creator-component': _creatorComponent2.default,
-	    'stats-component': _statsComponent2.default,
-	    'explore-component': _exploreComponent2.default
+	    'explore-component': _exploreComponent2.default,
+	    'shop-component': _shopComponent2.default
 	  },
+	  props: ['character'],
 	  data: function data() {
 	    return {
-	      character: {
-	        name: '',
-	        caste: '',
-	        hp: 100,
-	        strength: 0,
-	        agility: 0,
-	        luck: 0,
-	        mana: 0,
-	        created: false
-	      }
+	      exploring: false,
+	      shopping: false
 	    };
+	  },
+
+	  methods: {
+	    explore: function explore() {
+	      this.exploring = true;
+	      this.shopping = false;
+	    },
+	    shop: function shop() {
+	      this.shopping = true;
+	      this.exploring = false;
+	    }
 	  }
 	});
 
-	exports.default = AppComponent;
+	exports.default = ChoiceComponent;
 
 /***/ },
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n  <pre>{{ $data | json }}</pre>\r\n</div>"
+	module.exports = "<div>\r\n  <h3 v-if=\"!shopping && !exploring\">Roam the land, fight monsters, and find gear!</h3>\r\n  <button @click=\"explore\">Go Exploring</button>\r\n  <button @click=\"shop\">Visit a Village</button>\r\n  <explore-component :character=\"character\" v-if=\"!shopping && exploring\"></explore-component>\r\n  <shop-component :character=\"character\" v-if=\"!exploring && shopping\"></shop-component>\r\n</div>\r\n\r\n"
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _exploreComponentTemplate = __webpack_require__(12);
+
+	var _exploreComponentTemplate2 = _interopRequireDefault(_exploreComponentTemplate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ExploreComponent = _vue2.default.extend({
+	  template: _exploreComponentTemplate2.default,
+	  props: ['character'],
+	  data: function data() {
+	    return {
+	      dungeon: '',
+	      monster: '',
+	      exploring: false
+	    };
+	  },
+
+	  methods: {
+	    explore: function explore() {
+	      var dungeon = dungeons[Math.floor(Math.random() * dungeons.length)];
+	      var monster = monsters[Math.floor(Math.random() * monsters.length)].name;
+	      this.dungeon = dungeon;
+	      this.monster = monster;
+	      this.exploring = true;
+	    }
+	  }
+	});
+
+	exports.default = ExploreComponent;
+
+
+	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Caverns", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest"];
+
+	var monsters = [{
+	  name: "Rabid Basilisk"
+	}, {
+	  name: "Spooky Skellington"
+	}, {
+	  name: "Raging Warbeast of the Abyss"
+	}];
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\r\n  <button @click=\"explore\">Explore</button>\r\n  <h4 v-if=\"exploring\">{{ character.name }} encounters a {{ monster }} in the {{ dungeon }}</h4>\r\n</div>"
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _shopComponentTemplate = __webpack_require__(14);
+
+	var _shopComponentTemplate2 = _interopRequireDefault(_shopComponentTemplate);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// We actually want to show a list of available items with prices. You get gold from killing monsters. Maybe a loop that goes through the items array and pushes three randos, and THAT list is what's displayed as 'for sale'.
+
+	var ShopComponent = _vue2.default.extend({
+	  template: _shopComponentTemplate2.default,
+	  props: ['character'],
+	  data: function data() {
+	    return {
+	      village: '',
+	      item: '',
+	      shopping: false
+	    };
+	  },
+
+	  methods: {
+	    shop: function shop() {
+	      var village = villages[Math.floor(Math.random() * villages.length)];
+	      var item = items[Math.floor(Math.random() * items.length)].name;
+	      this.item = item;
+	      this.village = village;
+	      this.shopping = true;
+	    }
+	  }
+	});
+
+	exports.default = ShopComponent;
+
+
+	var villages = ["Ortul", "Calestrii", "Forest of Light", "Eldevin", "Nessus", "Thrax"];
+
+	var items = [{
+	  name: "Wand of Wilding"
+	}, {
+	  name: "Halberd of Distort"
+	}, {
+	  name: "Coat of Valor"
+	}];
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	module.exports = "<div>\r\n  <button @click=\"shop\">Let's Shop</button>\r\n  <h4 v-if=\"shopping\">{{ character.name }} finds the {{ item }} for sale in {{ village }}</h4>\r\n</div>"
 
 /***/ }
 /******/ ]);

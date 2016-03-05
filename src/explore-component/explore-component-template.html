@@ -1,7 +1,0 @@
-<div>
-  <h3>Roam the land, fight monsters, and find gear!</h3>
-  <button @click.prevent="explore">Go Exploring</button>
-  <button @click.prevent="shop">Visit a Village</button>
-  <h4 v-if="shopping">{{ character.name }} found the {{ item }} in {{ village }}</h4>
-  <h4 v-if="exploring">{{ character.name }} encounters a {{ monster }} in the {{ dungeon }}!</h4>
-</div>

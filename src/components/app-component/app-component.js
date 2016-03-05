@@ -2,14 +2,14 @@ import Vue from 'vue';
 import template from './app-component-template.html';
 import CreatorComponent from '../creator-component/creator-component';
 import StatsComponent from '../stats-component/stats-component';
-import ExploreComponent from '../explore-component/explore-component';
+import ChoiceComponent from '../choice-component/choice-component';
 
 const AppComponent = Vue.extend({
   template,
   components: {
     'creator-component': CreatorComponent,
     'stats-component': StatsComponent,
-    'explore-component': ExploreComponent
+    'choice-component': ChoiceComponent
   },
   data() {
     return {
@@ -21,7 +21,9 @@ const AppComponent = Vue.extend({
         agility: 0,
         luck: 0,
         mana: 0,
-        created: false
+        created: false,
+        exploring: false,
+        shopping: false
       }
     }
   }
