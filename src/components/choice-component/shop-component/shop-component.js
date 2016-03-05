@@ -1,6 +1,7 @@
 // We actually want to show a list of available items with prices. You get gold from killing monsters. Maybe a loop that goes through the items array and pushes three randos, and THAT list is what's displayed as 'for sale'.
 
 import Vue from 'vue';
+import _ from 'lodash';
 import template from './shop-component-template.html';
 
 const ShopComponent = Vue.extend({
@@ -8,6 +9,8 @@ const ShopComponent = Vue.extend({
   props: ['character'],
   data() {
     return {
+      villages: villages,
+      items: items,
       village: '',
       newItems: [],
       shopping: false
@@ -15,15 +18,8 @@ const ShopComponent = Vue.extend({
   },
   methods: {
     shop() {
-      var village = villages[Math.floor(Math.random() * villages.length)];
-      
-      var newItems = [];
-      for (var i = 0, x = items.length; i < 3; i++) {
-        var item = items[Math.floor(Math.random() * items.length)];
-        newItems.push(item);
-        console.log(newItems);
-      }
-      this.newItems = newItems;
+      var village = this.villages[-.random(this.villages.length)];
+      this.newItems = _.sampleSize(this.items, 3);
       this.village = village;
       this.shopping = !this.shopping;
     }
@@ -35,7 +31,7 @@ export default ShopComponent;
 var villages = [
   "Ortul",
   "Calestrii",
-  "Forest of Light",
+  "the Forest of Light",
   "Eldevin",
   "Nessus",
   "Thrax"

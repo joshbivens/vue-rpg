@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import _ from 'lodash';
 import template from './explore-component-template.html';
 
 const ExploreComponent = Vue.extend({
@@ -6,6 +7,8 @@ const ExploreComponent = Vue.extend({
   props: ['character'],
   data() {
     return {
+      dungeons: dungeons,
+      monsters: monsters,
       dungeon: '',
       monster: '',
       exploring: false
@@ -13,8 +16,8 @@ const ExploreComponent = Vue.extend({
   },
   methods: {
     explore() {
-      var dungeon = dungeons[Math.floor(Math.random() * dungeons.length)];
-      var monster = monsters[Math.floor(Math.random() * monsters.length)].name;  
+      var dungeon = this.dungeons[_.random(this.dungeons.length)];
+      var monster = this.monsters[_.random(this.monsters.length)].name;  
       this.dungeon = dungeon;
       this.monster = monster;
       this.exploring = true;
