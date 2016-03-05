@@ -10031,7 +10031,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\">\r\n    <p>{{ character.characterName }}</p>\r\n    <p>Class: {{ character.caste }}</p>\r\n    <p>Strength: {{ character.strength }}</p>\r\n    <p>Agility: {{ character.agility }}</p>\r\n    <p>Luck: {{ character.luck }}</p>\r\n    <p>Mana: {{ character.mana }}</p>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\">\r\n    <p>Strength: {{ character.strength }}</p>\r\n    <p>Agility: {{ character.agility }}</p>\r\n    <p>Luck: {{ character.luck }}</p>\r\n    <p>Mana: {{ character.mana }}</p>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 9 */
@@ -10267,7 +10267,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\" track-by=\"$index\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }
 /******/ ]);
