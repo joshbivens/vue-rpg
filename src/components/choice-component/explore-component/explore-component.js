@@ -31,17 +31,50 @@ var dungeons = [
   "Glowing Caverns",
   "Astral Plexus",
   "Orbal Dungeon",
-  "Dark Forest"
+  "Dark Forest",
+  "Lake of Lorne"
 ];
 
 var monsters = [
   {
-    name: "Rabid Basilisk"
+    name: "Simple Slime",
+    hp: 10,
+    attack: 0
   },
   {
-    name: "Spooky Skellington"
+    name: "Complex Slime",
+    hp: 20,
+    attack: 5
   },
   {
-    name: "Raging Warbeast of the Abyss"
+    name: "Common Basilisk",
+    hp: 30,
+    attack: 15
+  },
+  {
+    name: "Rabid Basilisk",
+    hp: 40,
+    attack: 25
+  },
+  {
+    name: "Simple Skellington",
+    hp: 25,
+    attack: 5
+  },
+  {
+    name: "Spooky Skellington",
+    hp: 25,
+    attack: 10
+  },
+  {
+    name: "Black Dragon of the Dark Forest",
+    hp: 500,
+    attack: 50
+  },
+  
+  {
+    name: "Raging Warbeast of the Abyss",
+    hp: 1000,
+    attack: 100
   }
 ];
