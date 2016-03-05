@@ -9,3 +9,7 @@ input, select {
   border-radius: 5px;
   outline: none;
 }
+
+.app-component {
+  margin-top: 75px;
+}
