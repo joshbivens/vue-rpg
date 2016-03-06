@@ -43,41 +43,49 @@ var monsters = [
   {
     name: "Simple Slime",
     hp: 10,
-    attack: 0
+    attack: 0,
+    gv: 1
   },
   {
     name: "Complex Slime",
     hp: 20,
-    attack: 5
+    attack: 5,
+    gv: 5
   },
   {
     name: "Common Basilisk",
     hp: 30,
-    attack: 15
+    attack: 15,
+    gv: 10
   },
   {
     name: "Rabid Basilisk",
     hp: 40,
-    attack: 25
+    attack: 25,
+    gv: 15
   },
   {
     name: "Simple Skellington",
     hp: 25,
-    attack: 5
+    attack: 5,
+    gv: 5
   },
   {
     name: "Spooky Skellington",
     hp: 25,
-    attack: 10
+    attack: 10,
+    gv: 10
   },
   {
     name: "Black Dragon",
     hp: 500,
-    attack: 50
+    attack: 50,
+    gv: 100
   },
   {
     name: "Raging Warbeast of the Abyss",
     hp: 1000,
-    attack: 100
+    attack: 100,
+    gv: 300
   }
 ];
