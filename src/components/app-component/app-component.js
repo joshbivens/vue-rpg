@@ -22,6 +22,7 @@ const AppComponent = Vue.extend({
         agility: 0,
         luck: 0,
         mana: 0,
+        inventory: [],
         created: false,
         exploring: false,
         shopping: false

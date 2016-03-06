@@ -2,6 +2,13 @@
   <h3>Enter your new character's name</h3>
   <input type="text" v-model="character.name">
   <h3>and their class</h3>
+    <select v-model="character.caste">
+    <option value="Cavalier" selected>Cavalier</option>
+    <option value="Hunter">Hunter</option>
+    <option value="Assassin">Assassin</option>
+    <option value="Shaman">Shaman</option>
+  </select>
+  <button @click="create">Create</button>
   <div class="row castes">
     <div class="three columns cavalier">
       <h5>Cavalier</h5>
@@ -40,11 +47,4 @@
       </ul>
     </div>
   </div>
-  <select v-model="character.caste">
-    <option value="Cavalier" selected>Cavalier</option>
-    <option value="Hunter">Hunter</option>
-    <option value="Assassin">Assassin</option>
-    <option value="Shaman">Shaman</option>
-  </select>
-  <button @click="create">Create</button>
 </div>

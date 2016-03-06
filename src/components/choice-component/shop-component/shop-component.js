@@ -22,6 +22,15 @@ const ShopComponent = Vue.extend({
       this.newItems = _.sampleSize(this.items, 3);
       this.village = village;
       this.shopping = !this.shopping;
+    },
+    buy(item) {
+      // Remove item from newItems
+      var newItem = item;
+      this.newItems.splice(this.newItems.indexOf(newItem), 1);
+      // Push item to character's inventory
+      this.character.inventory.push(newItem);
+      // Modify character stats
+      this.character.gold -= newItem.cost;
     }
   }
 });
@@ -63,6 +72,33 @@ var items = [
     strength: 10,
     agility: 10,
     luck: 10,
+    mana: 0
+  },
+  {
+    name: "Basic Shortsword",
+    cost: 10,
+    hp: 0,
+    strength: 5,
+    agility: 0,
+    luck: 0,
+    mana: 0
+  },
+  {
+    name: "Basic Longsword",
+    cost: 20,
+    hp: 0,
+    strength: 10,
+    agility: 0,
+    luck: 0,
+    mana: 0
+  },
+  {
+    name: "Dagger",
+    cost: 10,
+    hp: 0,
+    strength: 0,
+    agility: 10,
+    luck: 0,
     mana: 0
   }
 ];

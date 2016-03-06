@@ -3,9 +3,18 @@
   <h5>{{ character.caste }}</h5>
   <button @click="show">Stats</button>
   <div v-if="stats">
+    <p>Gold: {{ character.gold }}</p>
     <p>Strength: {{ character.strength }}</p>
     <p>Agility: {{ character.agility }}</p>
     <p>Luck: {{ character.luck }}</p>
     <p>Mana: {{ character.mana }}</p>
+    <div>
+      <h5>Inventory</h5>
+      <ul>
+        <li v-for="item in character.inventory">
+          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

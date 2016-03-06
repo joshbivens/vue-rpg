@@ -9907,6 +9907,7 @@
 	        agility: 0,
 	        luck: 0,
 	        mana: 0,
+	        inventory: [],
 	        created: false,
 	        exploring: false,
 	        shopping: false
@@ -9921,7 +9922,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app-component\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <choice-component v-show=\"character.created\" :character=\"character\"></choice-component>\r\n  <pre>{{ $data | json }}</pre>\r\n</div>"
+	module.exports = "<div class=\"app-component\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <choice-component v-show=\"character.created\" :character=\"character\"></choice-component>\r\n  <!--<pre>{{ $data | json }}</pre>-->\r\n</div>"
 
 /***/ },
 /* 5 */
@@ -9987,7 +9988,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n  <div class=\"row castes\">\r\n    <div class=\"three columns cavalier\">\r\n      <h5>Cavalier</h5>\r\n      <ul>\r\n        <li>Strength: 80 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 10 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns hunter\">\r\n      <h5>Hunter</h5>\r\n      <ul>\r\n        <li>Strength: 40 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 40 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns assassin\">\r\n      <h5>Assassin</h5>\r\n      <ul>\r\n        <li>Strength: 30 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 50 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns shaman\">\r\n      <h5>Shaman</h5>\r\n      <ul>\r\n        <li>Strength: 20 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 70 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n</div>"
+	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n    <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n  <div class=\"row castes\">\r\n    <div class=\"three columns cavalier\">\r\n      <h5>Cavalier</h5>\r\n      <ul>\r\n        <li>Strength: 80 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 10 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns hunter\">\r\n      <h5>Hunter</h5>\r\n      <ul>\r\n        <li>Strength: 40 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 40 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns assassin\">\r\n      <h5>Assassin</h5>\r\n      <ul>\r\n        <li>Strength: 30 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 50 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns shaman\">\r\n      <h5>Shaman</h5>\r\n      <ul>\r\n        <li>Strength: 20 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 70 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 7 */
@@ -10031,7 +10032,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\">\r\n    <p>Strength: {{ character.strength }}</p>\r\n    <p>Agility: {{ character.agility }}</p>\r\n    <p>Luck: {{ character.luck }}</p>\r\n    <p>Mana: {{ character.mana }}</p>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\">\r\n    <p>Gold: {{ character.gold }}</p>\r\n    <p>Strength: {{ character.strength }}</p>\r\n    <p>Agility: {{ character.agility }}</p>\r\n    <p>Luck: {{ character.luck }}</p>\r\n    <p>Mana: {{ character.mana }}</p>\r\n    <div>\r\n      <h5>Inventory</h5>\r\n      <ul>\r\n        <li v-for=\"item in character.inventory\">\r\n          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }}\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 9 */
@@ -10152,35 +10153,43 @@
 	var monsters = [{
 	  name: "Simple Slime",
 	  hp: 10,
-	  attack: 0
+	  attack: 0,
+	  gv: 1
 	}, {
 	  name: "Complex Slime",
 	  hp: 20,
-	  attack: 5
+	  attack: 5,
+	  gv: 5
 	}, {
 	  name: "Common Basilisk",
 	  hp: 30,
-	  attack: 15
+	  attack: 15,
+	  gv: 10
 	}, {
 	  name: "Rabid Basilisk",
 	  hp: 40,
-	  attack: 25
+	  attack: 25,
+	  gv: 15
 	}, {
 	  name: "Simple Skellington",
 	  hp: 25,
-	  attack: 5
+	  attack: 5,
+	  gv: 5
 	}, {
 	  name: "Spooky Skellington",
 	  hp: 25,
-	  attack: 10
+	  attack: 10,
+	  gv: 10
 	}, {
 	  name: "Black Dragon",
 	  hp: 500,
-	  attack: 50
+	  attack: 50,
+	  gv: 100
 	}, {
 	  name: "Raging Warbeast of the Abyss",
 	  hp: 1000,
-	  attack: 100
+	  attack: 100,
+	  gv: 300
 	}];
 
 /***/ },
@@ -10232,6 +10241,15 @@
 	      this.newItems = _lodash2.default.sampleSize(this.items, 3);
 	      this.village = village;
 	      this.shopping = !this.shopping;
+	    },
+	    buy: function buy(item) {
+	      // Remove item from newItems
+	      var newItem = item;
+	      this.newItems.splice(this.newItems.indexOf(newItem), 1);
+	      // Push item to character's inventory
+	      this.character.inventory.push(newItem);
+	      // Modify character stats
+	      this.character.gold -= newItem.cost;
 	    }
 	  }
 	}); // We actually want to show a list of available items with prices. You get gold from killing monsters. Maybe a loop that goes through the items array and pushes three randos, and THAT list is what's displayed as 'for sale'.
@@ -10265,13 +10283,37 @@
 	  agility: 10,
 	  luck: 10,
 	  mana: 0
+	}, {
+	  name: "Basic Shortsword",
+	  cost: 10,
+	  hp: 0,
+	  strength: 5,
+	  agility: 0,
+	  luck: 0,
+	  mana: 0
+	}, {
+	  name: "Basic Longsword",
+	  cost: 20,
+	  hp: 0,
+	  strength: 10,
+	  agility: 0,
+	  luck: 0,
+	  mana: 0
+	}, {
+	  name: "Dagger",
+	  cost: 10,
+	  hp: 0,
+	  strength: 0,
+	  agility: 10,
+	  luck: 0,
+	  mana: 0
 	}];
 
 /***/ },
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\" track-by=\"$index\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span>Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"shop\" v-if=\"!shopping\">Let's Shop</button>\r\n  <div v-if=\"shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\" track-by=\"$index\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span @click=\"buy(item)\">Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 15 */
