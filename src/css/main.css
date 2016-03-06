@@ -14,6 +14,98 @@ input, select {
   margin-top: 75px;
 }
 
+.levels {
+  height: 12px;
+}
+
+/*Cavalier*/
+
+.cavalier li:first-child .levels {
+  width: 100px;
+  background: lightgreen;
+}
+
+.cavalier li:nth-child(2) .levels {
+  width: 40px;
+  background: lightcoral;
+}
+
+.cavalier li:nth-child(3) .levels {
+  width: 40px;
+  background: burlywood;
+}
+
+.cavalier li:nth-child(4) .levels {
+  width: 20px;
+  background: lightskyblue;
+}
+
+/*Hunter*/
+
+.hunter li:first-child .levels {
+  width: 50px;
+  background: lightgreen;
+}
+
+.hunter li:nth-child(2) .levels {
+  width: 60px;
+  background: lightcoral;
+}
+
+.hunter li:nth-child(3) .levels {
+  width: 50px;
+  background: burlywood;
+}
+
+.hunter li:nth-child(4) .levels {
+  width: 40px;
+  background: lightskyblue;
+}
+
+/*Assassin*/
+
+.assassin li:first-child .levels {
+  width: 40px;
+  background: lightgreen;
+}
+
+.assassin li:nth-child(2) .levels {
+  width: 60px;
+  background: lightcoral;
+}
+
+.assassin li:nth-child(3) .levels {
+  width: 60px;
+  background: burlywood;
+}
+
+.assassin li:nth-child(4) .levels {
+  width: 40px;
+  background: lightskyblue;
+}
+
+/*Mage*/
+
+.shaman li:first-child .levels {
+  width: 30px;
+  background: lightgreen;
+}
+
+.shaman li:nth-child(2) .levels {
+  width: 40px;
+  background: lightcoral;
+}
+
+.shaman li:nth-child(3) .levels {
+  width: 40px;
+  background: burlywood;
+}
+
+.shaman li:nth-child(4) .levels {
+  width: 90px;
+  background: lightskyblue;
+}
+
 #shop {
   width: 90%;
 }
