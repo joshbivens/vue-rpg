@@ -1,7 +1,0 @@
-<div>
-  <button @click="explore" v-bind:class="{ 'active': exploring, 'passive': shopping }">Go Exploring</button>
-  <button @click="shop" v-bind:class="{ 'active': shopping, 'passive': exploring }">Visit a Village</button>
-  <explore-component :character="character" v-if="exploring"></explore-component>
-  <shop-component :character="character" v-if="shopping"></shop-component>
-</div>
-

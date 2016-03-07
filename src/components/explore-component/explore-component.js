@@ -10,8 +10,7 @@ const ExploreComponent = Vue.extend({
       dungeons: dungeons,
       monsters: monsters,
       dungeon: '',
-      monster: '',
-      exploring: false
+      monster: ''
     }
   },
   methods: {
@@ -21,7 +20,8 @@ const ExploreComponent = Vue.extend({
       var monsterName = monster.name;  
       this.dungeon = dungeon;
       this.monsterName = monsterName;
-      this.exploring = true;
+      this.character.exploring = true;
+      this.character.shopping = false;
     }
   }
 });

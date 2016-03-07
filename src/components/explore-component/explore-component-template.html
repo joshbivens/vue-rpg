@@ -1,0 +1,4 @@
+<div>
+  <button @click="explore" v-show="!character.exploring">Go Exploring</button>
+  <h4 v-if="character.exploring">{{ character.name }} encounters a {{ monsterName }} in the {{ dungeon }}</h4>
+</div>

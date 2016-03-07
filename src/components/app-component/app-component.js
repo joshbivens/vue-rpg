@@ -1,22 +1,24 @@
 import Vue from 'vue';
 import template from './app-component-template.html';
 import CreatorComponent from '../creator-component/creator-component';
+import ExploreComponent from '../explore-component/explore-component';
+import ShopComponent from '../shop-component/shop-component';
 import StatsComponent from '../stats-component/stats-component';
-import ChoiceComponent from '../choice-component/choice-component';
 
 const AppComponent = Vue.extend({
   template,
   components: {
     'creator-component': CreatorComponent,
-    'stats-component': StatsComponent,
-    'choice-component': ChoiceComponent
+    'explore-component': ExploreComponent,
+    'shop-component': ShopComponent,
+    'stats-component': StatsComponent
   },
   data() {
     return {
       character: {
         name: '',
         caste: '',
-        gold: 30,
+        gold: 50,
         hp: 100,
         strength: 0,
         agility: 0,

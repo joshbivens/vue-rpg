@@ -22,6 +22,32 @@ p {
   height: 12px;
 }
 
+#shop {
+  width: 90%;
+}
+
+span {
+  background: #bbb;
+  color: #fff;
+  font-size: .7em;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.active {
+  background: tomato;
+  color: #fff !important;
+}
+
+.passive {
+  background: #bbb;
+}
+
 /*Cavalier*/
 
 .cavalier li:first-child .levels {
@@ -108,27 +134,4 @@ p {
 .shaman li:nth-child(4) .levels {
   width: 90px;
   background: lightskyblue;
-}
-
-#shop {
-  width: 90%;
-}
-
-#shop span {
-  background: #bbb;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-ul {
-  list-style: none;
-}
-
-.active {
-  background: tomato;
-  color: #fff !important;
-}
-
-.passive {
-  background: #bbb;
 }

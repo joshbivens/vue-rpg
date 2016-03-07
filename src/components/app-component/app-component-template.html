@@ -1,6 +1,7 @@
 <div class="app-component">
   <creator-component v-show="!character.created" :character="character"></creator-component>
   <stats-component v-show="character.created" :character="character"></stats-component>
-  <choice-component v-show="character.created" :character="character"></choice-component>
+  <explore-component v-show="character.created" :character="character"></explore-component>
+  <shop-component v-show="character.created" :character="character"></shop-component>
   <!--<pre>{{ $data | json }}</pre>-->
 </div>
