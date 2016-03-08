@@ -22,10 +22,10 @@ const AppComponent = Vue.extend({
         hp: 100,
         strength: 0,
         agility: 0,
-        luck: 0,
-        mana: 0,
+        luck: 1,
         inventory: [],
         created: false,
+        alive: true,
         exploring: false,
         shopping: false
       }
