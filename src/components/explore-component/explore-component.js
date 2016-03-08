@@ -11,7 +11,10 @@ const ExploreComponent = Vue.extend({
       monsters: monsters,
       dungeon: '',
       monster: '',
-      fighting: false
+      round: 0, 
+      fighting: false,
+      characterTurn: false,
+      monsterTurn: false
     }
   },
   computed: {
@@ -24,8 +27,8 @@ const ExploreComponent = Vue.extend({
   },
   methods: {
     explore() {
-      var dungeon = this.dungeons[_.random(this.dungeons.length)];
-      var monster = this.monsters[_.random(this.monsters.length)];
+      var dungeon = this.dungeons[_.random(this.dungeons.length - 1)];
+      var monster = this.monsters[_.random(this.monsters.length - 1)];
       this.dungeon = dungeon;
       this.monster = monster;
       this.character.exploring = true;
@@ -33,14 +36,26 @@ const ExploreComponent = Vue.extend({
       this.fighting = false;
     },
     fight() {
+      this.round += 1;
       this.fighting = true;
-      // Compare the att/def values of you and the monster
-      // You go first
-      // if your att is higher than the monster's def, you hit for the full att value;
-      // if your att is lower, you don't hit
-      // Monster turn
-      // If monster att is higher than your def, they hit for half
-      // If not, nothing
+      this.characterTurn = true;
+      this.monsterTurn = false;
+      this.monster.hp -= this.attack;
+      if (this.monster.hp <= 0) {
+        this.monster.alive = false;
+        this.character.gold += this.monster.gv;
+        this.character.hp = 100;
+        this.round = 0;
+      }
+    },
+    endTurn() {
+      this.round += 1;
+      this.monsterTurn = true;
+      this.characterTurn = false;
+      this.character.hp -= this.monster.attack;
+      if (this.character.hp <= 0) {
+        this.character.alive = false;
+      }
     }
   }
 });
@@ -59,61 +74,68 @@ var dungeons = [
 ];
 
 var monsters = [
-  // {
-  //   name: "Simple Slime",
-  //   hp: 10,
-  //   attack: 0,
-  //   defense: 0,
-  //   gv: 1,
-  //   alive: true
-  // },
-  // {
-  //   name: "Complex Slime",
-  //   hp: 20,
-  //   attack: 5,
-  //   defense: 0,
-  //   gv: 5,
-  //   alive: true
-  // },
-  // {
-  //   name: "Common Basilisk",
-  //   hp: 30,
-  //   attack: 15,
-  //   defense: 10,
-  //   gv: 10,
-  //   alive: true
-  // },
-  // {
-  //   name: "Rabid Basilisk",
-  //   hp: 40,
-  //   attack: 25,
-  //   defense: 15,
-  //   gv: 15,
-  //   alive: true
-  // },
-  // {
-  //   name: "Simple Skellington",
-  //   hp: 25,
-  //   attack: 5,
-  //   defense: 10,
-  //   gv: 5,
-  //   alive: true
-  // },
-  // {
-  //   name: "Spooky Skellington",
-  //   hp: 25,
-  //   attack: 10,
-  //   defense: 10,
-  //   gv: 10,
-  //   alive: true
-  // },
+  {
+    name: "Simple Slime",
+    hp: 10,
+    attack: 0,
+    defense: 0,
+    gv: 1,
+    alive: true,
+    attacking: false
+  },
+  {
+    name: "Complex Slime",
+    hp: 20,
+    attack: 5,
+    defense: 0,
+    gv: 5,
+    alive: true,
+    attacking: false
+  },
+  {
+    name: "Common Basilisk",
+    hp: 30,
+    attack: 15,
+    defense: 10,
+    gv: 10,
+    alive: true,
+    attacking: false
+  },
+  {
+    name: "Rabid Basilisk",
+    hp: 40,
+    attack: 25,
+    defense: 15,
+    gv: 15,
+    alive: true,
+    attacking: false
+  },
+  {
+    name: "Simple Skellington",
+    hp: 25,
+    attack: 5,
+    defense: 10,
+    gv: 5,
+    alive: true,
+    attacking: false
+  },
+  {
+    name: "Spooky Skellington",
+    hp: 25,
+    attack: 10,
+    defense: 10,
+    gv: 10,
+    alive: true,
+    attacking: false
+  },
   {
     name: "Black Dragon",
     hp: 500,
     attack: 50,
     defense: 50,
     gv: 100,
-    alive: true
+    alive: true,
+    attacking: false
   },
   {
     name: "Raging Warbeast of the Abyss",
@@ -121,6 +143,7 @@ var monsters = [
     attack: 100,
     defense: 100,
     gv: 300,
-    alive: true
+    alive: true,
+    attacking: false
   }
 ];

@@ -8,23 +8,32 @@
       <p>Defense: {{ defense }}</p>
       <p>HP: {{ character.hp }}</p>
     </div>
-    <div class="five columns">
+    <div class="five columns" v-bind:class="{ 'inactive': !monster.alive }">
       <h5>{{ monster.name }}</h5>
       <p>Attack: {{ monster.attack }}</p>
       <p>Defense: {{ monster.defense }}</p>
       <p>HP: {{ monster.hp }}</p>
     </div>
-    <button @click="fight">Fight</button>
-    <button @click="explore">Flee</button>
-  </div>
-  <div v-show="fighting">
-    <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>
-      <div v=show="monster.alive">
-        <h5>The {{ monster.name }} hits you for {{ monster.attack }}</h5>
+    <div class="twelve columns">
+      <div v-show="!fighting">
+        <button @click="fight">Fight</button>
+        <button @click="explore">Flee</button>
       </div>
-      <div v-show="!monster.alive">
-        <h5>Congratulations! The {{ monster.name }} is dead!</h5>
-        <h5>You recieve {{ monster.gv }} gold!</h5>
+      <div v-show="fighting">
+        <div v-show="monster.alive">
+          <h5>Round {{ round }}</h5>
+          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>
+          <h5 v-show="monsterTurn">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>
+          <button @click="endTurn" v-show="characterTurn">End turn</button>
+          <button @click="fight" v-show="monsterTurn">Fight</button>
+        </div>
+        <div v-show="!monster.alive">
+          <h5>Congratulations! The {{ monster.name }} is dead!</h5>
+          <h5>You recieve {{ monster.gv }} gold!</h5>
+          <h5>Your health has been refilled.</h5>
+          <button @click="explore">Explore again</button>
+        </div>
       </div>
+    </div>
   </div>
 </div>

@@ -1,8 +1,10 @@
-<div class="app-component" v-show="character.alive">
-  <creator-component v-show="!character.created" :character="character"></creator-component>
-  <stats-component v-show="character.created" :character="character"></stats-component>
-  <explore-component v-show="character.created" :character="character"></explore-component>
-  <shop-component v-show="character.created" :character="character"></shop-component>
+<div class="app-component">
+  <div v-show="character.alive">
+    <creator-component v-show="!character.created" :character="character"></creator-component>
+    <stats-component v-show="character.created" :character="character"></stats-component>
+    <explore-component v-show="character.created" :character="character"></explore-component>
+    <shop-component v-show="character.created" :character="character"></shop-component>
+  </div>
   <!--<pre>{{ $data | json }}</pre>-->
   <h5 v-show="!character.alive">You are dead :(</h5>
 </div>

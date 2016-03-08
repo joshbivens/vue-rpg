@@ -9927,7 +9927,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app-component\" v-show=\"character.alive\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n  <shop-component v-show=\"character.created\" :character=\"character\"></shop-component>\r\n  <!--<pre>{{ $data | json }}</pre>-->\r\n  <h5 v-show=\"!character.alive\">You are dead :(</h5>\r\n</div>"
+	module.exports = "<div class=\"app-component\">\r\n  <div v-show=\"character.alive\">\r\n    <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n    <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n    <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n    <shop-component v-show=\"character.created\" :character=\"character\"></shop-component>\r\n  </div>\r\n  <!--<pre>{{ $data | json }}</pre>-->\r\n  <h5 v-show=\"!character.alive\">You are dead :(</h5>\r\n</div>"
 
 /***/ },
 /* 5 */
@@ -10016,7 +10016,10 @@
 	      monsters: monsters,
 	      dungeon: '',
 	      monster: '',
-	      fighting: false
+	      round: 0,
+	      fighting: false,
+	      characterTurn: false,
+	      monsterTurn: false
 	    };
 	  },
 
@@ -10030,8 +10033,8 @@
 	  },
 	  methods: {
 	    explore: function explore() {
-	      var dungeon = this.dungeons[_lodash2.default.random(this.dungeons.length)];
-	      var monster = this.monsters[_lodash2.default.random(this.monsters.length)];
+	      var dungeon = this.dungeons[_lodash2.default.random(this.dungeons.length - 1)];
+	      var monster = this.monsters[_lodash2.default.random(this.monsters.length - 1)];
 	      this.dungeon = dungeon;
 	      this.monster = monster;
 	      this.character.exploring = true;
@@ -10039,14 +10042,26 @@
 	      this.fighting = false;
 	    },
 	    fight: function fight() {
+	      this.round += 1;
 	      this.fighting = true;
-	      // Compare the att/def values of you and the monster
-	      // You go first
-	      // if your att is higher than the monster's def, you hit for the full att value;
-	      // if your att is lower, you don't hit
-	      // Monster turn
-	      // If monster att is higher than your def, they hit for half
-	      // If not, nothing
+	      this.characterTurn = true;
+	      this.monsterTurn = false;
+	      this.monster.hp -= this.attack;
+	      if (this.monster.hp <= 0) {
+	        this.monster.alive = false;
+	        this.character.gold += this.monster.gv;
+	        this.character.hp = 100;
+	        this.round = 0;
+	      }
+	    },
+	    endTurn: function endTurn() {
+	      this.round += 1;
+	      this.monsterTurn = true;
+	      this.characterTurn = false;
+	      this.character.hp -= this.monster.attack;
+	      if (this.character.hp <= 0) {
+	        this.character.alive = false;
+	      }
 	    }
 	  }
 	});
@@ -10056,69 +10071,70 @@
 
 	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Caverns", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest", "Lake of Lorne"];
 
-	var monsters = [
-	// {
-	//   name: "Simple Slime",
-	//   hp: 10,
-	//   attack: 0,
-	//   defense: 0,
-	//   gv: 1,
-	//   alive: true
-	// },
-	// {
-	//   name: "Complex Slime",
-	//   hp: 20,
-	//   attack: 5,
-	//   defense: 0,
-	//   gv: 5,
-	//   alive: true
-	// },
-	// {
-	//   name: "Common Basilisk",
-	//   hp: 30,
-	//   attack: 15,
-	//   defense: 10,
-	//   gv: 10,
-	//   alive: true
-	// },
-	// {
-	//   name: "Rabid Basilisk",
-	//   hp: 40,
-	//   attack: 25,
-	//   defense: 15,
-	//   gv: 15,
-	//   alive: true
-	// },
-	// {
-	//   name: "Simple Skellington",
-	//   hp: 25,
-	//   attack: 5,
-	//   defense: 10,
-	//   gv: 5,
-	//   alive: true
-	// },
-	// {
-	//   name: "Spooky Skellington",
-	//   hp: 25,
-	//   attack: 10,
-	//   defense: 10,
-	//   gv: 10,
-	//   alive: true
-	// },
-	{
+	var monsters = [{
+	  name: "Simple Slime",
+	  hp: 10,
+	  attack: 0,
+	  defense: 0,
+	  gv: 1,
+	  alive: true,
+	  attacking: false
+	}, {
+	  name: "Complex Slime",
+	  hp: 20,
+	  attack: 5,
+	  defense: 0,
+	  gv: 5,
+	  alive: true,
+	  attacking: false
+	}, {
+	  name: "Common Basilisk",
+	  hp: 30,
+	  attack: 15,
+	  defense: 10,
+	  gv: 10,
+	  alive: true,
+	  attacking: false
+	}, {
+	  name: "Rabid Basilisk",
+	  hp: 40,
+	  attack: 25,
+	  defense: 15,
+	  gv: 15,
+	  alive: true,
+	  attacking: false
+	}, {
+	  name: "Simple Skellington",
+	  hp: 25,
+	  attack: 5,
+	  defense: 10,
+	  gv: 5,
+	  alive: true,
+	  attacking: false
+	}, {
+	  name: "Spooky Skellington",
+	  hp: 25,
+	  attack: 10,
+	  defense: 10,
+	  gv: 10,
+	  alive: true,
+	  attacking: false
+	}, {
 	  name: "Black Dragon",
 	  hp: 500,
 	  attack: 50,
 	  defense: 50,
 	  gv: 100,
-	  alive: true
+	  alive: true,
+	  attacking: false
 	}, {
 	  name: "Raging Warbeast of the Abyss",
 	  hp: 1000,
 	  attack: 100,
 	  defense: 100,
 	  gv: 300,
-	  alive: true
+	  alive: true,
+	  attacking: false
 	}];
 
 /***/ },
@@ -25221,7 +25237,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <button @click=\"fight\">Fight</button>\r\n    <button @click=\"explore\">Flee</button>\r\n  </div>\r\n  <div v-show=\"fighting\">\r\n    <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n      <div v=show=\"monster.alive\">\r\n        <h5>The {{ monster.name }} hits you for {{ monster.attack }}</h5>\r\n      </div>\r\n      <div v-show=\"!monster.alive\">\r\n        <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n        <h5>You recieve {{ monster.gv }} gold!</h5>\r\n      </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <button @click=\"fight\" v-show=\"monsterTurn\">Fight</button>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n          <button @click=\"explore\">Explore again</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 11 */

@@ -55,6 +55,10 @@ span {
   cursor: pointer;
 }
 
+.inactive {
+  color: #bbb;
+}
+
 /*Cavalier*/
 
 .cavalier li:first-child .levels {
