@@ -9910,10 +9910,10 @@
 	        hp: 100,
 	        strength: 0,
 	        agility: 0,
-	        luck: 0,
-	        mana: 0,
+	        luck: 1,
 	        inventory: [],
 	        created: false,
+	        alive: true,
 	        exploring: false,
 	        shopping: false
 	      }
@@ -9927,7 +9927,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app-component\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n  <shop-component v-show=\"character.created\" :character=\"character\"></shop-component>\r\n  <!--<pre>{{ $data | json }}</pre>-->\r\n</div>"
+	module.exports = "<div class=\"app-component\" v-show=\"character.alive\">\r\n  <creator-component v-show=\"!character.created\" :character=\"character\"></creator-component>\r\n  <stats-component v-show=\"character.created\" :character=\"character\"></stats-component>\r\n  <explore-component v-show=\"character.created\" :character=\"character\"></explore-component>\r\n  <shop-component v-show=\"character.created\" :character=\"character\"></shop-component>\r\n  <!--<pre>{{ $data | json }}</pre>-->\r\n  <h5 v-show=\"!character.alive\">You are dead :(</h5>\r\n</div>"
 
 /***/ },
 /* 5 */
@@ -9958,27 +9958,15 @@
 	        this.character.created = true;
 	        if (this.character.caste == "Cavalier") {
 	          this.character.strength = 80;
-	          this.character.agility = 30;
-	          this.character.luck = 30;
-	          this.character.mana = 10;
+	          this.character.agility = 20;
 	        }
 	        if (this.character.caste == "Hunter") {
-	          this.character.strength = 40;
+	          this.character.strength = 30;
 	          this.character.agility = 70;
-	          this.character.luck = 40;
-	          this.character.mana = 20;
 	        }
 	        if (this.character.caste == "Assassin") {
 	          this.character.strength = 50;
-	          this.character.agility = 60;
-	          this.character.luck = 40;
-	          this.character.mana = 30;
-	        }
-	        if (this.character.caste == "Shaman") {
-	          this.character.strength = 30;
-	          this.character.agility = 30;
-	          this.character.luck = 30;
-	          this.character.mana = 70;
+	          this.character.agility = 50;
 	        }
 	      } else {
 	        alert("Please enter a name for your character");
@@ -9993,7 +9981,7 @@
 /* 6 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n    <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n    <option value=\"Shaman\">Shaman</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n  <div class=\"row castes\">\r\n    <div class=\"three columns cavalier\">\r\n      <h5>Cavalier</h5>\r\n      <ul>\r\n        <li>Strength: 80 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 10 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns hunter\">\r\n      <h5>Hunter</h5>\r\n      <ul>\r\n        <li>Strength: 40 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 40 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns assassin\">\r\n      <h5>Assassin</h5>\r\n      <ul>\r\n        <li>Strength: 30 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n        <li>Luck: 50 <div class=\"levels\"></div></li>\r\n        <li>Mana: 20 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns shaman\">\r\n      <h5>Shaman</h5>\r\n      <ul>\r\n        <li>Strength: 20 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n        <li>Luck: 30 <div class=\"levels\"></div></li>\r\n        <li>Mana: 70 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div v-show=\"!character.created\">\r\n  <h3>Enter your new character's name</h3>\r\n  <input type=\"text\" v-model=\"character.name\">\r\n  <h3>and their class</h3>\r\n    <select v-model=\"character.caste\">\r\n    <option value=\"Cavalier\" selected>Cavalier</option>\r\n    <option value=\"Hunter\">Hunter</option>\r\n    <option value=\"Assassin\">Assassin</option>\r\n  </select>\r\n  <button @click=\"create\">Create</button>\r\n  <div class=\"row castes\">\r\n    <div class=\"three columns cavalier\">\r\n      <h5>Cavalier</h5>\r\n      <ul>\r\n        <li>Strength: 70 <div class=\"levels\"></div></li>\r\n        <li>Agility: 30 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns hunter\">\r\n      <h5>Hunter</h5>\r\n      <ul>\r\n        <li>Strength: 30 <div class=\"levels\"></div></li>\r\n        <li>Agility: 70 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"three columns assassin\">\r\n      <h5>Assassin</h5>\r\n      <ul>\r\n        <li>Strength: 50 <div class=\"levels\"></div></li>\r\n        <li>Agility: 50 <div class=\"levels\"></div></li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 7 */
@@ -10027,19 +10015,38 @@
 	      dungeons: dungeons,
 	      monsters: monsters,
 	      dungeon: '',
-	      monster: ''
+	      monster: '',
+	      fighting: false
 	    };
 	  },
 
+	  computed: {
+	    attack: function attack() {
+	      return 10 + this.character.strength * 0.15 + this.character.agility * 0.1;
+	    },
+	    defense: function defense() {
+	      return this.character.agility * 0.3;
+	    }
+	  },
 	  methods: {
 	    explore: function explore() {
 	      var dungeon = this.dungeons[_lodash2.default.random(this.dungeons.length)];
 	      var monster = this.monsters[_lodash2.default.random(this.monsters.length)];
-	      var monsterName = monster.name;
 	      this.dungeon = dungeon;
-	      this.monsterName = monsterName;
+	      this.monster = monster;
 	      this.character.exploring = true;
 	      this.character.shopping = false;
+	      this.fighting = false;
+	    },
+	    fight: function fight() {
+	      this.fighting = true;
+	      // Compare the att/def values of you and the monster
+	      // You go first
+	      // if your att is higher than the monster's def, you hit for the full att value;
+	      // if your att is lower, you don't hit
+	      // Monster turn
+	      // If monster att is higher than your def, they hit for half
+	      // If not, nothing
 	    }
 	  }
 	});
@@ -10049,46 +10056,69 @@
 
 	var dungeons = ["Caves of Mraia", "Caves of Ortul", "Deeping Caverns", "Glowing Caverns", "Astral Plexus", "Orbal Dungeon", "Dark Forest", "Lake of Lorne"];
 
-	var monsters = [{
-	  name: "Simple Slime",
-	  hp: 10,
-	  attack: 0,
-	  gv: 1
-	}, {
-	  name: "Complex Slime",
-	  hp: 20,
-	  attack: 5,
-	  gv: 5
-	}, {
-	  name: "Common Basilisk",
-	  hp: 30,
-	  attack: 15,
-	  gv: 10
-	}, {
-	  name: "Rabid Basilisk",
-	  hp: 40,
-	  attack: 25,
-	  gv: 15
-	}, {
-	  name: "Simple Skellington",
-	  hp: 25,
-	  attack: 5,
-	  gv: 5
-	}, {
-	  name: "Spooky Skellington",
-	  hp: 25,
-	  attack: 10,
-	  gv: 10
-	}, {
+	var monsters = [
+	// {
+	//   name: "Simple Slime",
+	//   hp: 10,
+	//   attack: 0,
+	//   defense: 0,
+	//   gv: 1,
+	//   alive: true
+	// },
+	// {
+	//   name: "Complex Slime",
+	//   hp: 20,
+	//   attack: 5,
+	//   defense: 0,
+	//   gv: 5,
+	//   alive: true
+	// },
+	// {
+	//   name: "Common Basilisk",
+	//   hp: 30,
+	//   attack: 15,
+	//   defense: 10,
+	//   gv: 10,
+	//   alive: true
+	// },
+	// {
+	//   name: "Rabid Basilisk",
+	//   hp: 40,
+	//   attack: 25,
+	//   defense: 15,
+	//   gv: 15,
+	//   alive: true
+	// },
+	// {
+	//   name: "Simple Skellington",
+	//   hp: 25,
+	//   attack: 5,
+	//   defense: 10,
+	//   gv: 5,
+	//   alive: true
+	// },
+	// {
+	//   name: "Spooky Skellington",
+	//   hp: 25,
+	//   attack: 10,
+	//   defense: 10,
+	//   gv: 10,
+	//   alive: true
+	// },
+	{
 	  name: "Black Dragon",
 	  hp: 500,
 	  attack: 50,
-	  gv: 100
+	  defense: 50,
+	  gv: 100,
+	  alive: true
 	}, {
 	  name: "Raging Warbeast of the Abyss",
 	  hp: 1000,
 	  attack: 100,
-	  gv: 300
+	  defense: 100,
+	  gv: 300,
+	  alive: true
 	}];
 
 /***/ },
@@ -25191,7 +25221,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <h4 v-if=\"character.exploring\">{{ character.name }} encounters a {{ monsterName }} in the {{ dungeon }}</h4>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <button @click=\"fight\">Fight</button>\r\n    <button @click=\"explore\">Flee</button>\r\n  </div>\r\n  <div v-show=\"fighting\">\r\n    <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n      <div v=show=\"monster.alive\">\r\n        <h5>The {{ monster.name }} hits you for {{ monster.attack }}</h5>\r\n      </div>\r\n      <div v-show=\"!monster.alive\">\r\n        <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n        <h5>You recieve {{ monster.gv }} gold!</h5>\r\n      </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 11 */
@@ -25232,7 +25262,7 @@
 	  methods: {
 	    shop: function shop() {
 	      var village = this.villages[_lodash2.default.random(this.villages.length)];
-	      this.newItems = _lodash2.default.sampleSize(this.items, 3);
+	      this.newItems = _lodash2.default.sampleSize(this.items, 4);
 	      this.village = village;
 	      this.character.shopping = true;
 	      this.character.exploring = false;
@@ -25262,7 +25292,6 @@
 	  strength: 5,
 	  agility: 0,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Mystic Shortsword",
@@ -25271,7 +25300,6 @@
 	  strength: 10,
 	  agility: 5,
 	  luck: 0,
-	  mana: 10,
 	  equipped: false
 	}, {
 	  name: "Basic Longsword",
@@ -25280,7 +25308,6 @@
 	  strength: 15,
 	  agility: 0,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Longsword of Vitality",
@@ -25289,7 +25316,6 @@
 	  strength: 20,
 	  agility: 0,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Villager's Crossbow",
@@ -25298,7 +25324,6 @@
 	  strength: 0,
 	  agility: 10,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Villager's Longbow",
@@ -25307,7 +25332,6 @@
 	  strength: 10,
 	  agility: 10,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Hardened Crossbow",
@@ -25316,7 +25340,6 @@
 	  strength: 10,
 	  agility: 20,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Hardened Longbow",
@@ -25325,7 +25348,6 @@
 	  strength: 20,
 	  agility: 20,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Villager's Wand",
@@ -25334,7 +25356,6 @@
 	  strength: 0,
 	  agility: 0,
 	  luck: 0,
-	  mana: 10,
 	  equipped: false
 	}, {
 	  name: "Wand of the Wild",
@@ -25342,8 +25363,7 @@
 	  hp: 0,
 	  strength: 10,
 	  agility: 10,
-	  luck: -10,
-	  mana: 20,
+	  luck: 0,
 	  equipped: false
 	}, {
 	  name: "Dagger",
@@ -25352,7 +25372,6 @@
 	  strength: 0,
 	  agility: 10,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Lucky Dagger",
@@ -25360,8 +25379,7 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 10,
-	  luck: 10,
-	  mana: 0,
+	  luck: 2,
 	  equipped: false
 	}, {
 	  name: "Golden Dagger",
@@ -25370,7 +25388,6 @@
 	  strength: 10,
 	  agility: 10,
 	  luck: 10,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Coat of Valor",
@@ -25379,7 +25396,6 @@
 	  strength: 10,
 	  agility: 10,
 	  luck: 10,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Hardened Helm",
@@ -25388,7 +25404,6 @@
 	  strength: 10,
 	  agility: 0,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Dragon's Helm",
@@ -25397,7 +25412,6 @@
 	  strength: 10,
 	  agility: 0,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Obsidian Cloak",
@@ -25406,7 +25420,6 @@
 	  strength: 0,
 	  agility: 0,
 	  luck: 0,
-	  mana: 20,
 	  equipped: false
 	}, {
 	  name: "Fuligin Cloak",
@@ -25415,7 +25428,6 @@
 	  strength: 0,
 	  agility: 20,
 	  luck: 0,
-	  mana: 0,
 	  equipped: false
 	}, {
 	  name: "Chromkey Dreamcoat",
@@ -25424,7 +25436,6 @@
 	  strength: 0,
 	  agility: 0,
 	  luck: 0,
-	  mana: 30,
 	  equipped: false
 	}, {
 	  name: "Stealth Gauntlets",
@@ -25432,8 +25443,7 @@
 	  hp: 10,
 	  strength: 10,
 	  agility: 20,
-	  luck: 20,
-	  mana: 0,
+	  luck: 2,
 	  equipped: false
 	}, {
 	  name: "Golden Trinket",
@@ -25441,8 +25451,7 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 0,
-	  luck: 50,
-	  mana: 0,
+	  luck: 5,
 	  equipped: false
 	}];
 
@@ -25450,7 +25459,7 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"shop\" v-show=\"!character.shopping\">Visit a Village</button>\r\n  <div v-if=\"character.shopping\">\r\n    <div id=\"shop\">\r\n      <div>\r\n        <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>\r\n      </div>\r\n      <ul>\r\n        <li v-for=\"item in newItems\" track-by=\"$index\">\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span @click=\"buy(item)\">Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n            <li>Mana: {{ item.mana }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"shop\" v-show=\"!character.shopping\">Visit a Village</button>\r\n  <div v-if=\"character.shopping\" id=\"shop\">\r\n    <div>\r\n      <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>\r\n    </div>\r\n    <div class=\"five columns\" v-for=\"item in newItems\" track-by=\"$index\">\r\n      <ul>\r\n        <li>\r\n          <h5>{{ item.name }} - {{ item.cost }}g <span @click=\"buy(item)\">Buy</span></h5>\r\n          <ul>\r\n            <li>HP: {{ item.hp }}</li>\r\n            <li>Strength: {{ item.strength }}</li>\r\n            <li>Agility: {{ item.agility }}</li>\r\n            <li>Luck: {{ item.luck }}</li>\r\n          </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 13 */
@@ -25510,7 +25519,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\" class=\"row\">\r\n    <div class=\"six columns\">\r\n      <p>Gold: {{ character.gold }}</p>\r\n      <p>Strength: {{ character.strength }}</p>\r\n      <p>Agility: {{ character.agility }}</p>\r\n      <p>Luck: {{ character.luck }}</p>\r\n      <p>Mana: {{ character.mana }}</p>\r\n    </div>\r\n    <div class=\"six columns\">\r\n      <p><strong>Inventory</strong></p>\r\n      <ul>\r\n        <li v-for=\"item in character.inventory\">\r\n          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }} <span v-if=\"!item.equipped\" @click=\"equip(item)\">Equip</span><span v-if=\"item.equipped\" @click=\"unequip(item)\">Unequip</span>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\" class=\"row\">\r\n    <div class=\"six columns\">\r\n      <ul>\r\n        <li>Gold: {{ character.gold }}</li>\r\n        <li>Strength: {{ character.strength }}</li>\r\n        <li>Agility: {{ character.agility }}</li>\r\n        <li>Luck: {{ character.luck }}</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"six columns\">\r\n      <p><strong>Inventory</strong></p>\r\n      <ul>\r\n        <li v-for=\"item in character.inventory\">\r\n          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }} <span v-if=\"!item.equipped\" @click=\"equip(item)\">Equip</span><span v-if=\"item.equipped\" @click=\"unequip(item)\">Unequip</span>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }
 /******/ ]);
