@@ -1,19 +1,18 @@
 <div>
   <button @click="shop" v-show="!character.shopping">Visit a Village</button>
-  <div v-if="character.shopping">
-    <div id="shop">
-      <div>
-        <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>
-      </div>
+  <div v-if="character.shopping" id="shop">
+    <div>
+      <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>
+    </div>
+    <div class="five columns" v-for="item in newItems" track-by="$index">
       <ul>
-        <li v-for="item in newItems" track-by="$index">
+        <li>
           <h5>{{ item.name }} - {{ item.cost }}g <span @click="buy(item)">Buy</span></h5>
           <ul>
             <li>HP: {{ item.hp }}</li>
             <li>Strength: {{ item.strength }}</li>
             <li>Agility: {{ item.agility }}</li>
             <li>Luck: {{ item.luck }}</li>
-            <li>Mana: {{ item.mana }}</li>
           </ul>
         </li>
       </ul>

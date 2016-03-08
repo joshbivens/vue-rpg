@@ -16,7 +16,7 @@ const ShopComponent = Vue.extend({
   methods: {
     shop() {
       var village = this.villages[_.random(this.villages.length)];
-      this.newItems = _.sampleSize(this.items, 3);
+      this.newItems = _.sampleSize(this.items, 4);
       this.village = village;
       this.character.shopping = true;
       this.character.exploring = false;
@@ -53,7 +53,6 @@ var items = [
     strength: 5,
     agility: 0,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -63,7 +62,6 @@ var items = [
     strength: 10,
     agility: 5,
     luck: 0,
-    mana: 10,
     equipped: false
   },
   {
@@ -73,7 +71,6 @@ var items = [
     strength: 15,
     agility: 0,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -83,7 +80,6 @@ var items = [
     strength: 20,
     agility: 0,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -93,7 +89,6 @@ var items = [
     strength: 0,
     agility: 10,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -103,7 +98,6 @@ var items = [
     strength: 10,
     agility: 10,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -113,7 +107,6 @@ var items = [
     strength: 10,
     agility: 20,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -123,7 +116,6 @@ var items = [
     strength: 20,
     agility: 20,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -133,7 +125,6 @@ var items = [
     strength: 0,
     agility: 0,
     luck: 0,
-    mana: 10,
     equipped: false
   },
   {
@@ -142,8 +133,7 @@ var items = [
     hp: 0,
     strength: 10,
     agility: 10,
-    luck: -10,
-    mana: 20,
+    luck: 0,
     equipped: false
   },
   {
@@ -153,7 +143,6 @@ var items = [
     strength: 0,
     agility: 10,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -162,8 +151,7 @@ var items = [
     hp: 0,
     strength: 0,
     agility: 10,
-    luck: 10,
-    mana: 0,
+    luck: 2,
     equipped: false
   },
   {
@@ -173,7 +161,6 @@ var items = [
     strength: 10,
     agility: 10,
     luck: 10,
-    mana: 0,
     equipped: false
   },
   {
@@ -183,7 +170,6 @@ var items = [
     strength: 10,
     agility: 10,
     luck: 10,
-    mana: 0,
     equipped: false
   },
   {
@@ -193,7 +179,6 @@ var items = [
     strength: 10,
     agility: 0,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -203,7 +188,6 @@ var items = [
     strength: 10,
     agility: 0,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -213,7 +197,6 @@ var items = [
     strength: 0,
     agility: 0,
     luck: 0,
-    mana: 20,
     equipped: false
   },
   {
@@ -223,7 +206,6 @@ var items = [
     strength: 0,
     agility: 20,
     luck: 0,
-    mana: 0,
     equipped: false
   },
   {
@@ -233,7 +215,6 @@ var items = [
     strength: 0,
     agility: 0,
     luck: 0,
-    mana: 30,
     equipped: false
   },
   {
@@ -242,8 +223,7 @@ var items = [
     hp: 10,
     strength: 10,
     agility: 20,
-    luck: 20,
-    mana: 0,
+    luck: 2,
     equipped: false
   },
   {
@@ -252,8 +232,7 @@ var items = [
     hp: 0,
     strength: 0,
     agility: 0,
-    luck: 50,
-    mana: 0,
+    luck: 5,
     equipped: false
   }
 ];

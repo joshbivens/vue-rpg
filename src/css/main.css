@@ -22,8 +22,28 @@ p {
   height: 12px;
 }
 
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, ul li {
+  margin-bottom: 5px;
+}
+
+ul li {
+  margin: 0;
+}
+
+button {
+  margin-bottom: 20px;
+}
+
 #shop {
   width: 90%;
+}
+
+#shop ul:first-child {
+  display: inline;
 }
 
 span {
@@ -35,103 +55,38 @@ span {
   cursor: pointer;
 }
 
-ul {
-  list-style: none;
-}
-
-.active {
-  background: tomato;
-  color: #fff !important;
-}
-
-.passive {
-  background: #bbb;
-}
-
 /*Cavalier*/
 
 .cavalier li:first-child .levels {
-  width: 100px;
+  width: 90px;
   background: lightgreen;
 }
 
 .cavalier li:nth-child(2) .levels {
-  width: 40px;
+  width: 30px;
   background: lightcoral;
-}
-
-.cavalier li:nth-child(3) .levels {
-  width: 40px;
-  background: burlywood;
-}
-
-.cavalier li:nth-child(4) .levels {
-  width: 20px;
-  background: lightskyblue;
 }
 
 /*Hunter*/
 
 .hunter li:first-child .levels {
-  width: 50px;
+  width: 30px;
   background: lightgreen;
 }
 
 .hunter li:nth-child(2) .levels {
-  width: 60px;
+  width: 90px;
   background: lightcoral;
-}
-
-.hunter li:nth-child(3) .levels {
-  width: 50px;
-  background: burlywood;
-}
-
-.hunter li:nth-child(4) .levels {
-  width: 40px;
-  background: lightskyblue;
 }
 
 /*Assassin*/
 
 .assassin li:first-child .levels {
-  width: 40px;
+  width: 60px;
   background: lightgreen;
 }
 
 .assassin li:nth-child(2) .levels {
   width: 60px;
   background: lightcoral;
-}
-
-.assassin li:nth-child(3) .levels {
-  width: 60px;
-  background: burlywood;
-}
-
-.assassin li:nth-child(4) .levels {
-  width: 40px;
-  background: lightskyblue;
-}
-
-/*Mage*/
-
-.shaman li:first-child .levels {
-  width: 30px;
-  background: lightgreen;
-}
-
-.shaman li:nth-child(2) .levels {
-  width: 40px;
-  background: lightcoral;
-}
-
-.shaman li:nth-child(3) .levels {
-  width: 40px;
-  background: burlywood;
-}
-
-.shaman li:nth-child(4) .levels {
-  width: 90px;
-  background: lightskyblue;
 }
