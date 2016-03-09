@@ -10016,6 +10016,7 @@
 	      monsters: monsters,
 	      dungeon: '',
 	      monster: '',
+	      localHP: 0,
 	      goldFromLuck: 0,
 	      round: 0,
 	      fighting: false,
@@ -10038,6 +10039,8 @@
 	      var monster = this.monsters[_lodash2.default.random(this.monsters.length - 1)];
 	      this.dungeon = dungeon;
 	      this.monster = monster;
+	      this.monster.alive = true;
+	      this.localHP = monster.hp;
 	      this.character.exploring = true;
 	      this.character.shopping = false;
 	      this.fighting = false;
@@ -10047,8 +10050,8 @@
 	      this.fighting = true;
 	      this.characterTurn = true;
 	      this.monsterTurn = false;
-	      this.monster.hp -= this.attack;
-	      if (this.monster.hp <= 0) {
+	      this.localHP -= this.attack;
+	      if (this.localHP <= 0) {
 	        var goldFromLuck = _lodash2.default.random(this.character.luck);
 	        this.goldFromLuck = goldFromLuck;
 	        console.log(this.goldFromLuck);
@@ -25241,7 +25244,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <button @click=\"fight\" v-show=\"monsterTurn\">Fight</button>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ localHP }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <button @click=\"fight\" v-show=\"monsterTurn\">Fight</button>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n          <button @click=\"explore\">Explore again</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 11 */
