@@ -10016,6 +10016,7 @@
 	      monsters: monsters,
 	      dungeon: '',
 	      monster: '',
+	      goldFromLuck: 0,
 	      round: 0,
 	      fighting: false,
 	      characterTurn: false,
@@ -10048,8 +10049,11 @@
 	      this.monsterTurn = false;
 	      this.monster.hp -= this.attack;
 	      if (this.monster.hp <= 0) {
+	        var goldFromLuck = _lodash2.default.random(this.character.luck);
+	        this.goldFromLuck = goldFromLuck;
+	        console.log(this.goldFromLuck);
 	        this.monster.alive = false;
-	        this.character.gold += this.monster.gv;
+	        this.character.gold += this.monster.gv + goldFromLuck;
 	        this.character.hp = 100;
 	        this.round = 0;
 	      }
@@ -25237,7 +25241,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <button @click=\"fight\" v-show=\"monsterTurn\">Fight</button>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n          <button @click=\"explore\">Explore again</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ monster.hp }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <button @click=\"fight\" v-show=\"monsterTurn\">Fight</button>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 11 */
@@ -25535,7 +25539,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\" class=\"row\">\r\n    <div class=\"six columns\">\r\n      <ul>\r\n        <li>Gold: {{ character.gold }}</li>\r\n        <li>Strength: {{ character.strength }}</li>\r\n        <li>Agility: {{ character.agility }}</li>\r\n        <li>Luck: {{ character.luck }}</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"six columns\">\r\n      <p><strong>Inventory</strong></p>\r\n      <ul>\r\n        <li v-for=\"item in character.inventory\">\r\n          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }} <span v-if=\"!item.equipped\" @click=\"equip(item)\">Equip</span><span v-if=\"item.equipped\" @click=\"unequip(item)\">Unequip</span>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <h4>{{ character.name }}</h4>\r\n  <h5>{{ character.caste }}</h5>\r\n  <button @click=\"show\">Stats</button>\r\n  <div v-if=\"stats\" class=\"row\">\r\n    <div class=\"six columns\">\r\n      <ul>\r\n        <li>Gold: {{ character.gold }}</li>\r\n        <li>Strength: {{ character.strength }}</li>\r\n        <li>Agility: {{ character.agility }}</li>\r\n        <li>Luck: {{ character.luck }}</li>\r\n      </ul>\r\n    </div>\r\n    <div class=\"six columns\">\r\n      <p><strong>Inventory</strong></p>\r\n      <ul>\r\n        <li v-for=\"item in character.inventory\" track-by=\"$index\">\r\n          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }} <span v-if=\"!item.equipped\" @click=\"equip(item)\">Equip</span><span v-if=\"item.equipped\" @click=\"unequip(item)\">Unequip</span>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }
 /******/ ]);

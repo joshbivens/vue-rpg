@@ -11,6 +11,7 @@ const ExploreComponent = Vue.extend({
       monsters: monsters,
       dungeon: '',
       monster: '',
+      goldFromLuck: 0,
       round: 0, 
       fighting: false,
       characterTurn: false,
@@ -42,8 +43,11 @@ const ExploreComponent = Vue.extend({
       this.monsterTurn = false;
       this.monster.hp -= this.attack;
       if (this.monster.hp <= 0) {
+        var goldFromLuck = _.random(this.character.luck);
+        this.goldFromLuck = goldFromLuck;
+        console.log(this.goldFromLuck);
         this.monster.alive = false;
-        this.character.gold += this.monster.gv;
+        this.character.gold += this.monster.gv + goldFromLuck;
         this.character.hp = 100;
         this.round = 0;
       }

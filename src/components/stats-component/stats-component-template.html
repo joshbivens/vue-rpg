@@ -14,7 +14,7 @@
     <div class="six columns">
       <p><strong>Inventory</strong></p>
       <ul>
-        <li v-for="item in character.inventory">
+        <li v-for="item in character.inventory" track-by="$index">
           {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }}, Mana: {{ item.mana }} <span v-if="!item.equipped" @click="equip(item)">Equip</span><span v-if="item.equipped" @click="unequip(item)">Unequip</span>
         </li>
       </ul>
