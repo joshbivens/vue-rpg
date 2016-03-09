@@ -10019,7 +10019,9 @@
 	      localHP: 0,
 	      goldFromLuck: 0,
 	      round: 0,
+	      effect: '',
 	      fighting: false,
+	      monsterAlive: false,
 	      characterTurn: false,
 	      monsterTurn: false
 	    };
@@ -10039,7 +10041,7 @@
 	      var monster = this.monsters[_lodash2.default.random(this.monsters.length - 1)];
 	      this.dungeon = dungeon;
 	      this.monster = monster;
-	      this.monster.alive = true;
+	      this.monsterAlive = true;
 	      this.localHP = monster.hp;
 	      this.character.exploring = true;
 	      this.character.shopping = false;
@@ -10050,14 +10052,17 @@
 	      this.fighting = true;
 	      this.characterTurn = true;
 	      this.monsterTurn = false;
-	      if (this.attack > this.monster.defense) {
+	      if (this.attack >= this.monster.defense) {
 	        this.localHP -= this.attack;
+	        this.effect = '';
+	      } else {
+	        this.effect = "No effect!";
 	      }
 	      if (this.localHP <= 0) {
 	        var goldFromLuck = _lodash2.default.random(this.character.luck);
 	        this.goldFromLuck = goldFromLuck;
 	        console.log(this.goldFromLuck);
-	        this.monster.alive = false;
+	        this.monsterAlive = false;
 	        this.character.gold += this.monster.gv + goldFromLuck;
 	        this.character.hp = 100;
 	        this.round = 0;
@@ -10067,8 +10072,11 @@
 	      this.round += 1;
 	      this.monsterTurn = true;
 	      this.characterTurn = false;
-	      if (this.monster.attack > this.defense) {
+	      if (this.monster.attack >= this.defense) {
 	        this.character.hp -= this.monster.attack;
+	        this.effect = '';
+	      } else {
+	        this.effect = "No effect!";
 	      }
 	      if (this.character.hp <= 0) {
 	        this.character.alive = false;
@@ -10087,65 +10095,61 @@
 	  hp: 10,
 	  attack: 0,
 	  defense: 0,
-	  gv: 1,
-	  alive: true,
-	  attacking: false
+	  gv: 1
 	}, {
 	  name: "Complex Slime",
 	  hp: 20,
 	  attack: 5,
 	  defense: 0,
-	  gv: 5,
-	  alive: true,
-	  attacking: false
+	  gv: 5
 	}, {
 	  name: "Common Basilisk",
 	  hp: 30,
 	  attack: 15,
 	  defense: 10,
-	  gv: 10,
-	  alive: true,
-	  attacking: false
+	  gv: 10
 	}, {
 	  name: "Rabid Basilisk",
 	  hp: 40,
 	  attack: 25,
 	  defense: 15,
-	  gv: 15,
-	  alive: true,
-	  attacking: false
+	  gv: 15
 	}, {
 	  name: "Simple Skellington",
 	  hp: 25,
 	  attack: 5,
 	  defense: 10,
-	  gv: 5,
-	  alive: true,
-	  attacking: false
+	  gv: 5
 	}, {
 	  name: "Spooky Skellington",
 	  hp: 25,
 	  attack: 10,
 	  defense: 10,
-	  gv: 10,
-	  alive: true,
-	  attacking: false
+	  gv: 10
+	}, {
+	  name: "Young Mirelurk",
+	  hp: 30,
+	  attack: 30,
+	  defense: 30,
+	  gv: 30
+	}, {
+	  name: "Elder Mirelurk",
+	  hp: 100,
+	  attack: 50,
+	  defense: 80,
+	  gv: 100
 	}, {
 	  name: "Black Dragon",
 	  hp: 500,
 	  attack: 50,
 	  defense: 50,
-	  gv: 100,
-	  alive: true,
-	  attacking: false
+	  gv: 100
 	}, {
 	  name: "Raging Warbeast of the Abyss",
 	  hp: 1000,
 	  attack: 100,
 	  defense: 100,
-	  gv: 300,
-	  alive: true,
-	  attacking: false
+	  gv: 300
 	}];
 
 /***/ },
@@ -25248,7 +25252,7 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monster.alive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ localHP }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monster.alive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <div v-show=\"monsterTurn\">\r\n            <button @click=\"fight\">Fight</button>\r\n            <button @click=\"explore\">Flee</button>\r\n          </div>\r\n        </div>\r\n        <div v-show=\"!monster.alive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n          <button @click=\"explore\">Explore again</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+	module.exports = "<div>\r\n  <button @click=\"explore\" v-show=\"!character.exploring\">Go Exploring</button>\r\n  <div v-if=\"character.exploring\" class=\"row\">\r\n    <h4>{{ character.name }} encounters a {{ monster.name }} in the {{ dungeon }}</h4>\r\n    <div class=\"five columns\">\r\n      <h5>You</h5>\r\n      <p>Attack: {{ attack }}</p>\r\n      <p>Defense: {{ defense }}</p>\r\n      <p>HP: {{ character.hp }}</p>\r\n    </div>\r\n    <div class=\"five columns\" v-bind:class=\"{ 'inactive': !monsterAlive }\">\r\n      <h5>{{ monster.name }}</h5>\r\n      <p>Attack: {{ monster.attack }}</p>\r\n      <p>Defense: {{ monster.defense }}</p>\r\n      <p>HP: {{ localHP }}</p>\r\n    </div>\r\n    <div class=\"twelve columns\">\r\n      <div v-show=\"!fighting\">\r\n        <button @click=\"fight\">Fight</button>\r\n        <button @click=\"explore\">Flee</button>\r\n      </div>\r\n      <div v-show=\"fighting\">\r\n        <div v-show=\"monsterAlive\">\r\n          <h5>Round {{ round }}</h5>\r\n          <h5>You hit the {{ monster.name }} for {{ attack }} damage! {{ effect }}</h5>\r\n          <h5 v-show=\"monsterTurn\">The {{ monster.name }} hit you for {{ monster.attack }} damage! {{ effect }}</h5>\r\n          <button @click=\"endTurn\" v-show=\"characterTurn\">End turn</button>\r\n          <div v-show=\"monsterTurn\">\r\n            <button @click=\"fight\">Fight</button>\r\n            <button @click=\"explore\">Flee</button>\r\n          </div>\r\n        </div>\r\n        <div v-show=\"!monsterAlive\">\r\n          <h5>Congratulations! The {{ monster.name }} is dead!</h5>\r\n          <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>\r\n          <h5>Your health has been refilled.</h5>\r\n          <button @click=\"explore\">Explore again</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ },
 /* 11 */
