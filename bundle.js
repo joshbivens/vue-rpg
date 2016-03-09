@@ -25319,7 +25319,7 @@
 	  hp: 5,
 	  strength: 10,
 	  agility: 5,
-	  luck: 0,
+	  luck: 5,
 	  equipped: false
 	}, {
 	  name: "Basic Longsword",
@@ -25343,7 +25343,7 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 10,
-	  luck: 0,
+	  luck: 1,
 	  equipped: false
 	}, {
 	  name: "Villager's Longbow",
@@ -25351,7 +25351,7 @@
 	  hp: 0,
 	  strength: 10,
 	  agility: 10,
-	  luck: 0,
+	  luck: 1,
 	  equipped: false
 	}, {
 	  name: "Hardened Crossbow",
@@ -25359,7 +25359,7 @@
 	  hp: 0,
 	  strength: 10,
 	  agility: 20,
-	  luck: 0,
+	  luck: 2,
 	  equipped: false
 	}, {
 	  name: "Hardened Longbow",
@@ -25367,15 +25367,15 @@
 	  hp: 0,
 	  strength: 20,
 	  agility: 20,
-	  luck: 0,
+	  luck: 2,
 	  equipped: false
 	}, {
 	  name: "Villager's Wand",
 	  cost: 10,
 	  hp: 0,
-	  strength: 0,
-	  agility: 0,
-	  luck: 0,
+	  strength: 5,
+	  agility: 5,
+	  luck: 2,
 	  equipped: false
 	}, {
 	  name: "Wand of the Wild",
@@ -25383,7 +25383,7 @@
 	  hp: 0,
 	  strength: 10,
 	  agility: 10,
-	  luck: 0,
+	  luck: 4,
 	  equipped: false
 	}, {
 	  name: "Dagger",
@@ -25391,7 +25391,7 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 10,
-	  luck: 0,
+	  luck: 1,
 	  equipped: false
 	}, {
 	  name: "Lucky Dagger",
@@ -25399,19 +25399,19 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 10,
-	  luck: 2,
+	  luck: 3,
 	  equipped: false
 	}, {
 	  name: "Golden Dagger",
-	  cost: 50,
+	  cost: 60,
 	  hp: 10,
 	  strength: 10,
-	  agility: 10,
-	  luck: 10,
+	  agility: 20,
+	  luck: 5,
 	  equipped: false
 	}, {
 	  name: "Coat of Valor",
-	  cost: 50,
+	  cost: 60,
 	  hp: 10,
 	  strength: 10,
 	  agility: 10,
@@ -25439,7 +25439,7 @@
 	  hp: 20,
 	  strength: 0,
 	  agility: 0,
-	  luck: 0,
+	  luck: 5,
 	  equipped: false
 	}, {
 	  name: "Fuligin Cloak",
@@ -25471,7 +25471,7 @@
 	  hp: 0,
 	  strength: 0,
 	  agility: 0,
-	  luck: 5,
+	  luck: 15,
 	  equipped: false
 	}];
 
