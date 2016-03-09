@@ -25,7 +25,10 @@
           <h5>You hit the {{ monster.name }} for {{ attack }} damage!</h5>
           <h5 v-show="monsterTurn">The {{ monster.name }} hit you for {{ monster.attack }} damage!</h5>
           <button @click="endTurn" v-show="characterTurn">End turn</button>
-          <button @click="fight" v-show="monsterTurn">Fight</button>
+          <div v-show="monsterTurn">
+            <button @click="fight">Fight</button>
+            <button @click="explore">Flee</button>
+          </div>
         </div>
         <div v-show="!monster.alive">
           <h5>Congratulations! The {{ monster.name }} is dead!</h5>
