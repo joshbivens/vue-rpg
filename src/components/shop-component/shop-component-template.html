@@ -1,13 +1,13 @@
 <div>
   <button @click="shop" v-show="!character.shopping">Visit a Village</button>
-  <div v-if="character.shopping" id="shop">
+  <div v-show="character.shopping" id="shop">
     <div>
       <h4>Village of {{ village }} - You have {{ character.gold }} gold</h4>
     </div>
     <div class="five columns" v-for="item in newItems" track-by="$index">
       <ul>
         <li>
-          <h5>{{ item.name }} - {{ item.cost }}g <span @click="buy(item)">Buy</span></h5>
+          <h5>{{ item.name }} - {{ item.cost }}g <span @click="buyItem(item)">Buy</span></h5>
           <ul>
             <li>HP: {{ item.hp }}</li>
             <li>Strength: {{ item.strength }}</li>
@@ -16,6 +16,9 @@
           </ul>
         </li>
       </ul>
+    </div>
+    <div class="twelve columns">
+      <div v-for="potion in potions">{{ potion.name }} - {{ potion.cost }}g <span @click="buyPotion(potion)">Buy</span></div>
     </div>
   </div>
 </div>

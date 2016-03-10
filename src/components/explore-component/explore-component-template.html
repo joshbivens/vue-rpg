@@ -22,7 +22,7 @@
       <div v-show="fighting">
         <div v-show="monsterAlive">
           <h5>Round {{ round }}</h5>
-          <h5>You hit the {{ monster.name }} for {{ attack }} damage! {{ effect }}</h5>
+          <h5 v-show="!monsterTurn">You hit the {{ monster.name }} for {{ attack }} damage! {{ effect }}</h5>
           <h5 v-show="monsterTurn">The {{ monster.name }} hit you for {{ monster.attack }} damage! {{ effect }}</h5>
           <button @click="endTurn" v-show="characterTurn">End turn</button>
           <div v-show="monsterTurn">
@@ -33,7 +33,6 @@
         <div v-show="!monsterAlive">
           <h5>Congratulations! The {{ monster.name }} is dead!</h5>
           <h5>You recieve {{ monster.gv }} gold and {{ goldFromLuck }} gold from luck!</h5>
-          <h5>Your health has been refilled.</h5>
           <button @click="explore">Explore again</button>
         </div>
       </div>

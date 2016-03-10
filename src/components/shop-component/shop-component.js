@@ -10,32 +10,37 @@ const ShopComponent = Vue.extend({
       villages: villages,
       items: items,
       village: '',
-      newItems: []
+      newItems: [],
+      potions: potions
     }
   },
   methods: {
     shop() {
-      var village = this.villages[_.random(this.villages.length)];
+      var village = this.villages[_.random(this.villages.length - 1)];
       this.newItems = _.sampleSize(this.items, 4);
       this.village = village;
+      this.potions = potions;
       this.character.shopping = true;
       this.character.exploring = false;
     },
-    buy(item) {
-      var newItem = item;
-      if (this.character.gold >= newItem.cost) {
-        this.newItems.splice(this.newItems.indexOf(newItem), 1);
-        this.character.inventory.push(newItem);
-        this.character.gold -= newItem.cost;
+    buyItem(item) {
+      if (this.character.gold >= item.cost) {
+        this.newItems.splice(this.newItems.indexOf(item), 1);
+        this.character.inventory.push(item);
+        this.character.gold -= item.cost;
+      }
+    },
+    buyPotion(item) {
+      if (this.character.gold >= item.cost) {
+        this.character.potions.push(item);
+        this.character.gold -= item.cost;
       }
     }
   }
 });
 
-// Attack value for a character will be a combination of the stats! Computed maybe.
-
 export default ShopComponent;
-    
+
 var villages = [
   "Ortul",
   "Calestrii",
@@ -43,6 +48,27 @@ var villages = [
   "Eldevin",
   "Nessus",
   "Thrax"
+];
+
+var potions = [
+  {
+    name: "Minor Health Potion (+10 HP)",
+    cost: 10,
+    hp: 10,
+    equipped: false
+  },
+  {
+    name: "Major Health Potion (+30 HP)",
+    cost: 20,
+    hp: 30,
+    equipped: false
+  },
+  {
+    name: "Max Health Potion (Full HP)",
+    cost: 50,
+    hp: 100,
+    equipped: false
+  }
 ];
 
 var items = [
@@ -185,7 +211,7 @@ var items = [
     name: "Dragon's Helm",
     cost: 30,
     hp: 20,
-    strength: 10,
+    strength: 20,
     agility: 0,
     luck: 0,
     equipped: false

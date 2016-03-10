@@ -24,6 +24,7 @@ const AppComponent = Vue.extend({
         agility: 0,
         luck: 1,
         inventory: [],
+        potions: [],
         created: false,
         alive: true,
         exploring: false,

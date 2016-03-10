@@ -58,7 +58,6 @@ const ExploreComponent = Vue.extend({
         console.log(this.goldFromLuck);
         this.monsterAlive = false;
         this.character.gold += this.monster.gv + goldFromLuck;
-        this.character.hp = 100;
         this.round = 0;
       }
     },
@@ -66,9 +65,9 @@ const ExploreComponent = Vue.extend({
       this.round += 1;
       this.monsterTurn = true;
       this.characterTurn = false;
+      this.effect = '';
       if (this.monster.attack >= this.defense) {
         this.character.hp -= this.monster.attack;
-        this.effect = '';
       } else {
         this.effect = "No effect!";
       }
