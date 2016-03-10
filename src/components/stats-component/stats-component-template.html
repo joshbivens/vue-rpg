@@ -2,9 +2,10 @@
   <h4>{{ character.name }}</h4>
   <h5>{{ character.caste }}</h5>
   <button @click="show">Stats</button>
-  <div v-if="stats" class="row">
+  <div v-show="stats" class="row stats" transition="fade">
     <div class="six columns">
       <ul>
+        <li>HP: {{ character.hp }}</li>
         <li>Gold: {{ character.gold }}</li>
         <li>Strength: {{ character.strength }}</li>
         <li>Agility: {{ character.agility }}</li>
@@ -12,12 +13,22 @@
       </ul>
     </div>
     <div class="six columns">
-      <p><strong>Inventory</strong></p>
-      <ul>
-        <li v-for="item in character.inventory" track-by="$index">
-          {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }} <span v-if="!item.equipped" @click="equip(item)">Equip</span><span v-if="item.equipped" @click="unequip(item)">Unequip</span>
-        </li>
-      </ul>
+      <div v-show="character.inventory.length" transition="fade">
+        <p><strong>Inventory</strong></p>
+        <ul>
+          <li v-for="item in character.inventory" track-by="$index">
+            {{ item.name }} - HP: {{ item.hp }}, Strength: {{ item.strength }}, Agility: {{ item.agility }}, Luck: {{ item.luck }} <span v-if="!item.equipped" @click="equip(item)">Equip</span><span v-if="item.equipped" @click="unequip(item)">Unequip</span> <span @click="sell(item)">Sell</span>
+          </li>
+        </ul>
+      </div>
+      <div v-show="character.potions.length" transition="fade">
+        <p><strong>Potions</strong></p>
+        <ul>
+          <li v-for="potion in character.potions" track-by="$index">
+            {{ potion.name }} <span @click="drink(potion)">Drink</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
