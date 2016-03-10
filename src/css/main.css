@@ -51,7 +51,8 @@ span {
   color: #fff;
   font-size: .7em;
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 7px;
+  margin: 0 2px;
   cursor: pointer;
 }
 
@@ -93,4 +94,19 @@ span {
 .assassin li:nth-child(2) .levels {
   width: 60px;
   background: lightcoral;
+}
+
+.stats {
+  position: relative;
+  transform-origin: 0 0;
+}
+
+/*Transitions*/
+.fade-transition {
+  transition: all 0.2s ease-out;
+}
+
+.fade-enter, .fade-leave {
+  opacity: 0;
+  transform: translateX(5px);
 }
