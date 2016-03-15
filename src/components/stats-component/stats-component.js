@@ -19,7 +19,6 @@ const StatsComponent = Vue.extend({
       this.character.strength += item.strength;
       this.character.agility += item.agility;
       this.character.luck += item.luck;
-      this.character.mana += item.mana;
     },
     unequip(item) {
       item.equipped = false;
@@ -27,7 +26,6 @@ const StatsComponent = Vue.extend({
       this.character.strength -= item.strength;
       this.character.agility -= item.agility;
       this.character.luck -= item.luck;
-      this.character.mana -= item.mana;
     },
     sell(item) {
       this.character.gold += item.cost;
